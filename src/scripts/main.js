@@ -1,7 +1,17 @@
-// Efecto de gradiente dinámico
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
-  const angle = 24 + scrollY * 0.1;
+
+  // Ajustar velocidad según ancho de pantalla
+  let speedFactor;
+  if (window.innerWidth >= 1200) {
+    speedFactor = 0.1; // velocidad normal
+  } else if (window.innerWidth >= 768) {
+    speedFactor = 0.07; // más lenta en tablets
+  } else {
+    speedFactor = 0.045; // aún más lenta en móviles
+  }
+
+  const angle = 24 + scrollY * speedFactor;
   document.body.style.background = `linear-gradient(${angle}deg, #d2d6ef, #cab1b7, #0a2036)`;
 });
 
