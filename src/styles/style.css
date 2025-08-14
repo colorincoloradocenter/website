@@ -1,20 +1,42 @@
 body {
   font-family: 'TikTok Sans', sans-serif;
-  background: linear-gradient(24deg, #d2d6ef, #e1e5f0, #8cb7ca);
+  background: linear-gradient(24deg, #d2d6ef, #cab1b7, #0a2036);
   background-attachment: fixed;
   background-size: cover;
   transition: background 0.2s ease;
 }
+
 .price {
   font-family: 'Fredoka', sans-serif;
   font-weight: 600;
 }
+
 .price sup {
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
   font-size: 0.3em;
   vertical-align: super;
 }
+
 .plan-title {
   margin-top: 2rem;
+}
+
+/* Header siempre fijo */
+.header-theme {
+  background-color: black;
+  color: white;
+}
+
+/* Texto del header */
+.header-text a, .header-text h1 {
+  color: white;
+}
+
+/* En modo oscuro del sistema, el header será blanco con texto negro */
+@media (prefers-color-scheme: dark) {
+  .header-theme {
+    background-color: black;
+    color: white;
+  }
 }
