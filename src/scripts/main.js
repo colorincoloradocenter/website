@@ -22,13 +22,13 @@ const container = document.getElementById("plans-container");
 // Generar cards dinámicamente
 plans.forEach(plan => {
   const card = `
-    <div class="bg-[#0d0e0e] text-white rounded-[35px] shadow-lg p-8 flex flex-col justify-between transform transition-transform duration-300 hover:scale-105">
+    <div class="bg-[#0d0e0e]/90 text-white rounded-[35px] shadow-lg p-8 flex flex-col justify-between transform transition-transform duration-300 hover:scale-105">
       <div class="flex flex-col items-center">
         <h3 class="plan-title text-1g font-normal text-[#c4c4c4]">${plan.tipo}</h3>
         <h3 class="plan-title text-xl font-bold -mt-1 mb-4">${plan.nombre}</h3>
         <span class="price text-6xl mb-2"><sup>S/</sup>${plan.precio}</span>
         <p class="text-[#b2b1c4] mb-4">${plan.sesiones} ${plan.sesiones === 1 ? 'sesión' : 'sesiones'}</p>
-        <div class="bg-[#12161a] text-gray-200 text-xs px-3 py-2 rounded-lg flex flex-col items-center sm:flex-row sm:justify-center sm:gap-2 sm:rounded-full">
+        <div class="bg-white/5 text-gray-200 text-xs px-3 py-2 rounded-lg flex flex-col items-center sm:flex-row sm:justify-center sm:gap-2 sm:rounded-full">
           <span class="font-bold">Frecuencia:</span>
           <span class="font-normal">${plan.frecuencia}</span>
         </div>
