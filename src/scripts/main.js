@@ -1,7 +1,7 @@
 // Efecto de gradiente dinámico
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
-  const angle = 24 + scrollY * 0.3;
+  const angle = 24 + scrollY * 0.1;
   document.body.style.background = `linear-gradient(${angle}deg, #d2d6ef, #cab1b7, #0a2036)`;
 });
 
@@ -22,7 +22,7 @@ const container = document.getElementById("plans-container");
 // Generar cards dinámicamente
 plans.forEach(plan => {
   const card = `
-    <div class="bg-[#000000] text-white rounded-[35px] shadow-lg p-8 flex flex-col justify-between transform transition-transform duration-300 hover:scale-105">
+    <div class="bg-[#0d0e0e] text-white rounded-[35px] shadow-lg p-8 flex flex-col justify-between transform transition-transform duration-300 hover:scale-105">
       <div class="flex flex-col items-center">
         <h3 class="plan-title text-1g font-normal text-[#c4c4c4]">${plan.tipo}</h3>
         <h3 class="plan-title text-xl font-bold -mt-1 mb-4">${plan.nombre}</h3>
