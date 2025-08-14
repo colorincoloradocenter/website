@@ -278,3 +278,11 @@ window.addEventListener('scroll', () => {
         starCount = width * starDensity;
     }
 });
+
+window.addEventListener('DOMContentLoaded', () => {
+  const header = document.querySelector('header');
+  const spacer = document.querySelector('.header-spacer');
+  if (header && spacer) {
+    spacer.style.height = header.offsetHeight + 'px';
+  }
+});
