@@ -1,6 +1,6 @@
 body {
     font-family: 'TikTok Sans', sans-serif;
-    background: linear-gradient(24deg, #d2d6ef, #cab1b7, #0a2036);
+    background: linear-gradient(24deg, #010a13, #22212f, #473545, #0a2036, #030f1c);
     background-size: cover;
     margin: 0;
     padding: 0;
@@ -66,4 +66,10 @@ header {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-style: normal;
+}
+
+footer {
+  position: relative;
+  z-index: 2;
+  background: #000; /* o el color que uses */
 }

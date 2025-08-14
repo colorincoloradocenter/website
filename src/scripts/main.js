@@ -12,7 +12,7 @@ window.addEventListener('scroll', () => {
   }
 
   const angle = 24 + scrollY * speedFactor;
-  document.body.style.background = `linear-gradient(${angle}deg, #d2d6ef, #cab1b7, #0a2036)`;
+  document.body.style.background = `linear-gradient(${angle}deg, #010a13, #22212f, #473545, #0a2036, #030f1c)`;
 });
 
 // Datos de planes
@@ -248,23 +248,33 @@ function getRandInterval(min, max) {
 
 function windowResizeHandler() {
     width = window.innerWidth;
-    height = window.innerHeight;
+    const footer = document.getElementById('footer');
+    const footerTop = footer.getBoundingClientRect().top + window.scrollY;
+    height = Math.max(window.innerHeight, footerTop);
     starCount = width * starDensity;
     canva.setAttribute('width', width);
     canva.setAttribute('height', height);
 }
 
-// Fondo dinámico según scroll (opcional)
 window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    let speedFactor;
-    if (window.innerWidth >= 1200) {
-        speedFactor = 0.1;
-    } else if (window.innerWidth >= 768) {
-        speedFactor = 0.07;
-    } else {
-        speedFactor = 0.045;
+    // Calcula la nueva altura del canvas según el scroll
+    const footer = document.getElementById('footer');
+    const footerTop = footer.getBoundingClientRect().top + window.scrollY;
+    const newHeight = Math.max(window.innerHeight, window.scrollY + window.innerHeight, footerTop);
+
+    canva.setAttribute('height', newHeight);
+
+    // Genera más estrellas si el canvas crece
+    if (newHeight > height) {
+        const extraStars = Math.floor((newHeight - height) * starDensity);
+        for (let i = 0; i < extraStars; i++) {
+            const s = new Star();
+            s.x = getRandInterval(0, width);
+            s.y = getRandInterval(height, newHeight);
+            s.reset();
+            stars.push(s);
+        }
+        height = newHeight;
+        starCount = width * starDensity;
     }
-    const angle = 24 + scrollY * speedFactor;
-    document.body.style.background = `linear-gradient(${angle}deg, #d2d6ef, #cab1b7, #0a2036)`;
 });
