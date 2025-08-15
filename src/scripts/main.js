@@ -27,7 +27,6 @@ const plans = [
 
 const container = document.getElementById("plans-container");
 
-// Generar cards dinámicamente
 plans.forEach(plan => {
   const card = `
     <div class="bg-[#0d0e0e]/90 text-white rounded-[35px] shadow-lg p-8 flex flex-col justify-between transform transition-transform duration-300 hover:scale-105">
@@ -61,33 +60,27 @@ function updateNavBarBySection() {
   const planesRect = planesSection.getBoundingClientRect();
   const footerRect = footerSection.getBoundingClientRect();
 
-  // Oculta todas las barras
   document.getElementById('bar-inicio').style.opacity = '0';
   document.getElementById('bar-planes').style.opacity = '0';
   document.getElementById('bar-contacto').style.opacity = '0';
 
-  // 1️⃣ Inicio: si el scroll está cerca del tope
   if (scrollY < headerHeight + 50) {
     document.getElementById('bar-inicio').style.opacity = '1';
   }
-  // 2️⃣ Footer visible
   else if (footerRect.top < windowHeight * 0.6) {
     document.getElementById('bar-contacto').style.opacity = '1';
   }
-  // 3️⃣ Planes visible
   else if (
     planesRect.top < windowHeight * 0.5 &&
     planesRect.bottom > windowHeight * 0.25
   ) {
     document.getElementById('bar-planes').style.opacity = '1';
   }
-  // 4️⃣ Por defecto, inicio
   else {
     document.getElementById('bar-inicio').style.opacity = '1';
   }
 }
 
-// Scroll suave para los enlaces del menú
 document.getElementById('nav-inicio').addEventListener('click', function(e) {
   e.preventDefault();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -106,11 +99,9 @@ document.getElementById('nav-contacto').addEventListener('click', function(e) {
   setTimeout(updateNavBarBySection, 700);
 });
 
-// Actualiza la barra azul dinámicamente al hacer scroll
 window.addEventListener('scroll', updateNavBarBySection);
 window.addEventListener('DOMContentLoaded', updateNavBarBySection);
 
-// Universe background effect
 var starDensity = .15;
 var speedCoeff = .03;
 var width;
@@ -255,14 +246,10 @@ function windowResizeHandler() {
 }
 
 window.addEventListener('scroll', () => {
-    // Calcula la nueva altura del canvas según el scroll
     const footer = document.getElementById('footer');
     const footerTop = footer.getBoundingClientRect().top + window.scrollY;
     const newHeight = Math.max(window.innerHeight, window.scrollY + window.innerHeight, footerTop);
-
     canva.setAttribute('height', newHeight);
-
-    // Genera más estrellas si el canvas crece
     if (newHeight > height) {
         const extraStars = Math.floor((newHeight - height) * starDensity);
         for (let i = 0; i < extraStars; i++) {
@@ -276,7 +263,6 @@ window.addEventListener('scroll', () => {
         starCount = width * starDensity;
     }
 });
-
 window.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('header');
   const spacer = document.querySelector('.header-spacer');
@@ -284,7 +270,6 @@ window.addEventListener('DOMContentLoaded', () => {
     spacer.style.height = header.offsetHeight + 'px';
   }
 });
-
 function updateHeaderSpacer() {
   const header = document.querySelector('header');
   const spacer = document.querySelector('.header-spacer');
@@ -292,8 +277,6 @@ function updateHeaderSpacer() {
     spacer.style.height = header.offsetHeight + 'px';
   }
 }
-
-// Actualiza al cargar y al redimensionar
 window.addEventListener('DOMContentLoaded', updateHeaderSpacer);
 window.addEventListener('resize', updateHeaderSpacer);
 
@@ -327,13 +310,12 @@ mediaFiles.forEach(fileName => {
   photosContainer.innerHTML += mediaCard;
 });
 
-/* STICKER UNICORNIO */
 (function() {
     const unicorn = document.getElementById('unicorn-toy');
     let posX = 50, posY = 50;
     let velX = 2, velY = 2;
-    const friction = 0.99; // fricción para inercia
-    const bounce = 0.8; // rebote
+    const friction = 0.99;
+    const bounce = 0.8;
     const speedLimit = 15; 
 
     let dragging = false;
@@ -368,7 +350,6 @@ mediaFiles.forEach(fileName => {
         requestAnimationFrame(updatePosition);
     }
 
-    // Inicio del arrastre
     unicorn.addEventListener('mousedown', startDrag);
     unicorn.addEventListener('touchstart', startDrag, { passive: false });
 
