@@ -299,7 +299,9 @@ window.addEventListener('resize', updateHeaderSpacer);
 
 const mediaFiles = [
   "media_1.gif",
-  "media_2.png"
+  "media_2.png",
+  "media_3.jpg",
+  "media_4.jpg"
 ];
 
 const photosContainer = document.getElementById("photos-welcome");
@@ -324,3 +326,102 @@ mediaFiles.forEach(fileName => {
   const mediaCard = `<div class="media-card">${mediaTag}</div>`;
   photosContainer.innerHTML += mediaCard;
 });
+
+/* STICKER UNICORNIO */
+(function() {
+    const unicorn = document.getElementById('unicorn-toy');
+    let posX = 50, posY = 50;
+    let velX = 2, velY = 2;
+    const friction = 0.99; // fricción para inercia
+    const bounce = 0.8; // rebote
+    const speedLimit = 15; 
+
+    let dragging = false;
+    let offsetX, offsetY;
+    let lastMouseX, lastMouseY;
+    let lastMoveTime;
+
+    function updatePosition() {
+        if (!dragging) {
+            posX += velX;
+            posY += velY;
+
+            const maxX = window.innerWidth - unicorn.offsetWidth;
+            const maxY = window.innerHeight - unicorn.offsetHeight;
+
+            if (posX <= 0 || posX >= maxX) {
+                posX = Math.max(0, Math.min(posX, maxX));
+                velX = -velX * bounce;
+            }
+            if (posY <= 0 || posY >= maxY) {
+                posY = Math.max(0, Math.min(posY, maxY));
+                velY = -velY * bounce;
+            }
+
+            velX *= friction;
+            velY *= friction;
+        }
+
+        unicorn.style.left = posX + 'px';
+        unicorn.style.top = posY + 'px';
+
+        requestAnimationFrame(updatePosition);
+    }
+
+    // Inicio del arrastre
+    unicorn.addEventListener('mousedown', startDrag);
+    unicorn.addEventListener('touchstart', startDrag, { passive: false });
+
+    function startDrag(e) {
+        e.preventDefault();
+        dragging = true;
+        unicorn.style.cursor = 'grabbing';
+
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        offsetX = clientX - posX;
+        offsetY = clientY - posY;
+        lastMouseX = clientX;
+        lastMouseY = clientY;
+        lastMoveTime = Date.now();
+
+        document.addEventListener('mousemove', onDrag);
+        document.addEventListener('touchmove', onDrag, { passive: false });
+        document.addEventListener('mouseup', endDrag);
+        document.addEventListener('touchend', endDrag);
+    }
+
+    function onDrag(e) {
+        e.preventDefault();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        const now = Date.now();
+        const deltaTime = now - lastMoveTime;
+
+        velX = (clientX - lastMouseX) / (deltaTime / 16); 
+        velY = (clientY - lastMouseY) / (deltaTime / 16);
+
+        velX = Math.max(Math.min(velX, speedLimit), -speedLimit);
+        velY = Math.max(Math.min(velY, speedLimit), -speedLimit);
+
+        posX = clientX - offsetX;
+        posY = clientY - offsetY;
+
+        lastMouseX = clientX;
+        lastMouseY = clientY;
+        lastMoveTime = now;
+    }
+
+    function endDrag() {
+        dragging = false;
+        unicorn.style.cursor = 'grab';
+        document.removeEventListener('mousemove', onDrag);
+        document.removeEventListener('touchmove', onDrag);
+        document.removeEventListener('mouseup', endDrag);
+        document.removeEventListener('touchend', endDrag);
+    }
+
+    updatePosition();
+})();

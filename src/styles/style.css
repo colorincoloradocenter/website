@@ -104,3 +104,19 @@ footer {
   object-fit: cover;
   object-position: bottom;
 }
+
+@media (max-width: 600px) {
+  #unicorn-toy {
+    width: 40px;
+    height: 40px;
+  }
+}
+#unicorn-toy {
+    position: fixed;
+    top: 50px;
+    left: 50px;
+    width: 80px;
+    height: 80px;
+    cursor: grab;
+    z-index: 999;
+}
