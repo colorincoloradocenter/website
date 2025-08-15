@@ -21,8 +21,8 @@ const plans = [
   { tipo: "Plan", nombre: "Estándar", precio: 470, sesiones: 12, frecuencia: "3 sesiones por semana" },
   { tipo: "Plan", nombre: "Premium", precio: 600, sesiones: 16, frecuencia: "4 sesiones por semana" },
   { tipo: "Plan", nombre: "Especial", precio: 750, sesiones: 20, frecuencia: "5 sesiones por semana" },
-  { tipo: "Extreme", nombre: "Base", precio: 840, sesiones: 24, frecuencia: "6 sesiones por semana" },
-  { tipo: "Plan", nombre: "Fullmonth", precio: 980, sesiones: 28, frecuencia: "7 sesiones por semana" }
+  { tipo: "Plan", nombre: "Extremo", precio: 840, sesiones: 24, frecuencia: "6 sesiones por semana" },
+  { tipo: "Plan", nombre: "Full", precio: 980, sesiones: 28, frecuencia: "7 sesiones por semana" }
 ];
 
 const container = document.getElementById("plans-container");
@@ -283,4 +283,44 @@ window.addEventListener('DOMContentLoaded', () => {
   if (header && spacer) {
     spacer.style.height = header.offsetHeight + 'px';
   }
+});
+
+function updateHeaderSpacer() {
+  const header = document.querySelector('header');
+  const spacer = document.querySelector('.header-spacer');
+  if (header && spacer) {
+    spacer.style.height = header.offsetHeight + 'px';
+  }
+}
+
+// Actualiza al cargar y al redimensionar
+window.addEventListener('DOMContentLoaded', updateHeaderSpacer);
+window.addEventListener('resize', updateHeaderSpacer);
+
+const mediaFiles = [
+  "media_1.gif",
+  "media_2.png"
+];
+
+const photosContainer = document.getElementById("photos-welcome");
+
+mediaFiles.forEach(fileName => {
+  const filePath = `public/media/${fileName}`;
+  const ext = fileName.split('.').pop().toLowerCase();
+
+  let mediaTag = "";
+  if (["jpg", "jpeg", "png", "gif", "webp"].includes(ext)) {
+    mediaTag = `<img src="${filePath}" alt="">`;
+  } 
+  else if (["mp4", "webm", "ogg"].includes(ext)) {
+    mediaTag = `
+      <video controls>
+        <source src="${filePath}" type="video/${ext}">
+        Tu navegador no soporta el video.
+      </video>
+    `;
+  }
+
+  const mediaCard = `<div class="media-card">${mediaTag}</div>`;
+  photosContainer.innerHTML += mediaCard;
 });
