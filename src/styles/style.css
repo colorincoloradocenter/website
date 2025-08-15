@@ -6,7 +6,6 @@ body {
     padding: 0;
 }
 
-/* Canvas Universe como fondo */
 #universe {
     position: fixed;
     top: 0;
@@ -33,8 +32,6 @@ body {
 .plan-title {
   margin-top: 2rem;
 }
-
-/* Header siempre fijo */
 
 header {
   position: fixed;

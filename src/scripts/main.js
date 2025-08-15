@@ -1,21 +1,19 @@
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
 
-  // Ajustar velocidad según ancho de pantalla
   let speedFactor;
   if (window.innerWidth >= 1200) {
-    speedFactor = 0.1; // velocidad normal
+    speedFactor = 0.1;
   } else if (window.innerWidth >= 768) {
-    speedFactor = 0.07; // más lenta en tablets
+    speedFactor = 0.07;
   } else {
-    speedFactor = 0.045; // aún más lenta en móviles
+    speedFactor = 0.045;
   }
 
   const angle = 24 + scrollY * speedFactor;
   document.body.style.background = `linear-gradient(${angle}deg, #010a13, #22212f, #473545, #0a2036, #030f1c)`;
 });
 
-// Datos de planes
 const plans = [
   { tipo: "Sesión", nombre: "Individual", precio: 50, sesiones: 1, frecuencia: "Flexible" },
   { tipo: "Plan", nombre: "Base", precio: 170, sesiones: 4, frecuencia: "1 sesión por semana" },
@@ -24,7 +22,7 @@ const plans = [
   { tipo: "Plan", nombre: "Premium", precio: 600, sesiones: 16, frecuencia: "4 sesiones por semana" },
   { tipo: "Plan", nombre: "Especial", precio: 750, sesiones: 20, frecuencia: "5 sesiones por semana" },
   { tipo: "Extreme", nombre: "Base", precio: 840, sesiones: 24, frecuencia: "6 sesiones por semana" },
-  { tipo: "Plan", nombre: "Fullness", precio: 980, sesiones: 28, frecuencia: "7 sesiones por semana" }
+  { tipo: "Plan", nombre: "Fullmonth", precio: 980, sesiones: 28, frecuencia: "7 sesiones por semana" }
 ];
 
 const container = document.getElementById("plans-container");
