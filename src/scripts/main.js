@@ -17,8 +17,8 @@ window.addEventListener('scroll', () => {
 const plans = [
   { tipo: "Sesión", nombre: "Individual", precio: 50, sesiones: 1, frecuencia: "Flexible" },
   { tipo: "Plan", nombre: "Base", precio: 170, sesiones: 4, frecuencia: "1 sesión por semana" },
-  { tipo: "Plan", nombre: "Básico", precio: 320, sesiones: 8, frecuencia: "2 sesiones por semana" },
-  { tipo: "Plan", nombre: "Estándar", precio: 470, sesiones: 12, frecuencia: "3 sesiones por semana" },
+  { tipo: "Plan", nombre: "Básico", precio: 305, sesiones: 8, frecuencia: "2 sesiones por semana" },
+  { tipo: "Plan", nombre: "Estándar", precio: 455, sesiones: 12, frecuencia: "3 sesiones por semana" },
   { tipo: "Plan", nombre: "Premium", precio: 600, sesiones: 16, frecuencia: "4 sesiones por semana" },
   { tipo: "Plan", nombre: "Especial", precio: 750, sesiones: 20, frecuencia: "5 sesiones por semana" },
   { tipo: "Plan", nombre: "Extremo", precio: 840, sesiones: 24, frecuencia: "6 sesiones por semana" },
@@ -138,6 +138,8 @@ function createUniverse() {
 
 function draw() {
     universe.clearRect(0, 0, width, height);
+    
+
     var starsLength = stars.length;
     for (var i = 0; i < starsLength; i++) {
         var star = stars[i];
@@ -227,6 +229,8 @@ function Star() {
     })()
 }
 
+
+
 function getProbability(percents) {
     return ((Math.floor(Math.random() * 1000) + 1) < percents * 10);
 }
@@ -250,19 +254,21 @@ window.addEventListener('scroll', () => {
     const footerTop = footer.getBoundingClientRect().top + window.scrollY;
     const newHeight = Math.max(window.innerHeight, window.scrollY + window.innerHeight, footerTop);
     canva.setAttribute('height', newHeight);
+    canva.style.height = newHeight + 'px';
     if (newHeight > height) {
         const extraStars = Math.floor((newHeight - height) * starDensity);
         for (let i = 0; i < extraStars; i++) {
             const s = new Star();
+            s.reset();
             s.x = getRandInterval(0, width);
             s.y = getRandInterval(height, newHeight);
-            s.reset();
             stars.push(s);
         }
         height = newHeight;
         starCount = width * starDensity;
     }
 });
+
 window.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('header');
   const spacer = document.querySelector('.header-spacer');
