@@ -289,7 +289,6 @@ window.addEventListener('resize', updateHeaderSpacer);
 const mediaFiles = [
   "media_1.gif",
   "media_2.png",
-  "media_3.jpg",
   "media_4.jpg"
 ];
 
@@ -412,3 +411,43 @@ mediaFiles.forEach(fileName => {
 
     updatePosition();
 })();
+
+/* const unicorn = document.getElementById('unicorn-toy');
+const bubble = document.getElementById('unicorn-bubble');
+
+function showBubble(text, duration = 2000) {
+  bubble.textContent = text;
+  // Posiciona la burbuja cerca del unicornio
+  bubble.style.left = (unicorn.offsetLeft + unicorn.offsetWidth + 10) + 'px';
+  bubble.style.top = unicorn.offsetTop + 'px';
+  bubble.style.display = 'block';
+  setTimeout(() => bubble.style.display = 'none', duration);
+}
+
+// Ejemplo: cuando lo tocan
+unicorn.addEventListener('mousedown', () => {
+  showBubble('¡Me tocaste!');
+});
+
+// Ejemplo: cada cierto tiempo
+setInterval(() => {
+  showBubble('¡Estoy aquí!');
+}, 10000);
+
+function updateBubblePosition() {
+  if (bubble.style.display === 'block') {
+    bubble.style.left = (posX + unicorn.offsetWidth + 10) + 'px';
+    bubble.style.top = posY + 'px';
+  }
+}
+
+// En tu loop de movimiento del unicornio
+function updatePosition() {
+  // ... tu código de mover unicornio
+  unicorn.style.left = posX + "px";
+  unicorn.style.top = posY + "px";
+
+  // ahora actualizas la burbuja también
+  updateBubblePosition();
+}
+ */

@@ -120,3 +120,26 @@ footer {
     cursor: grab;
     z-index: 999;
 }
+
+/* .speech-bubble {
+  position: absolute;
+  left: 100%; 
+  top: 20%;
+  background: #fff;
+  color: #333;
+  padding: 12px 20px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  font-size: 1rem;
+  z-index: 1000;
+  min-width: 80px;
+}
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 20px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent #fff transparent transparent;
+} */
