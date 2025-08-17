@@ -121,25 +121,27 @@ footer {
     z-index: 999;
 }
 
-/* .speech-bubble {
-  position: absolute;
-  left: 100%; 
-  top: 20%;
+.speech-bubble {
   background: #fff;
   color: #333;
-  padding: 12px 20px;
-  border-radius: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  font-size: 1rem;
-  z-index: 1000;
+  padding: 16px 16px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  position: fixed;
   min-width: 80px;
+  max-width: 220px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: none;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
-.speech-bubble::after {
-  content: '';
-  position: absolute;
-  left: -16px;
-  top: 20px;
-  border-width: 8px;
-  border-style: solid;
-  border-color: transparent #fff transparent transparent;
-} */

@@ -412,42 +412,365 @@ mediaFiles.forEach(fileName => {
     updatePosition();
 })();
 
-/* const unicorn = document.getElementById('unicorn-toy');
-const bubble = document.getElementById('unicorn-bubble');
+(function () {
+  // ----------------------------- CONFIG ----------------------------------
+  const WHATSAPP_URL = "https://wa.me/51967260163?text=Hola,%20estoy%20interesad@%20en%20sus%20servicios."; // ajusta si lo deseas
+  const PLANS_ANCHOR = "#planes";
 
-function showBubble(text, duration = 2000) {
-  bubble.textContent = text;
-  // Posiciona la burbuja cerca del unicornio
-  bubble.style.left = (unicorn.offsetLeft + unicorn.offsetWidth + 10) + 'px';
-  bubble.style.top = unicorn.offsetTop + 'px';
-  bubble.style.display = 'block';
-  setTimeout(() => bubble.style.display = 'none', duration);
-}
+  // Umbrales y tiempos
+  const SPEED_LIMIT = 15;
+  const LAUNCH_SPEED_THRESHOLD = 9;   // velocidad para considerar un "lanzamiento"
+  const COLLISION_COOLDOWN = 600;     // ms para no spamear mensajes al chocar
+  const IDLE_INTERVAL = 13000;        // ms entre mensajes idle
+  const CLICK_WINDOW = 1100;          // ms para agrupar 1,2,3,4+ clics
 
-// Ejemplo: cuando lo tocan
-unicorn.addEventListener('mousedown', () => {
-  showBubble('¡Me tocaste!');
-});
+  // ------------------------------ FRASES ---------------------------------
+  // ➜ Añade/edita frases en cada categoría manteniendo el tono.
+  const phrases = {
+    onLoad: [
+      "¡Hola! te acompañaré mientras estés aquí. 🦄✨",
+      "¡Bienvenid@! ¿List@ para jugar conmigo?",
+    ],
 
-// Ejemplo: cada cierto tiempo
-setInterval(() => {
-  showBubble('¡Estoy aquí!');
-}, 10000);
+    dragStart: [
+      "¡Sujétame fuerte, que despego! 🚀",
+      "¡Uuuh! ¡Vamos a dar una vuelta! 🎢",
+      "Con cuidado… soy delicado pero valiente 😌",
+      "#Siente el movimiento"
+    ],
 
-function updateBubblePosition() {
-  if (bubble.style.display === 'block') {
-    bubble.style.left = (posX + unicorn.offsetWidth + 10) + 'px';
-    bubble.style.top = posY + 'px';
+    dropPlayful: [
+      "¡Aterrizaje perfecto! 🛬",
+      "¡Eso estuvo cerca! 😵‍💫",
+      "¡Qué lanzamiento! Deberías unirte al equipo 😎",
+      "Me dejaste con brillantina en el aire ✨"
+    ],
+
+    // Choques por borde
+    hitLeft: [
+      "¡Ouch! La izquierda me abrazó 🔙",
+      "Pared izquierda 1 – Unicornio 0",
+      "Ok, no más a la izquierda… por ahora 😅"
+    ],
+    hitRight: [
+      "¡Auch! La derecha está dura ➡️",
+      "Pared derecha desbloqueada 🧱",
+      "Toqué el límite… pero la aventura continúa."
+    ],
+    hitTop: [
+      "¡Ay! El cielo también tiene techo ☁️",
+      "Arriba no hay salida… solo estrellas ✨",
+      "Me peiné con el techo 🤕"
+    ],
+    hitBottom: [
+      "¡Piso, mi viejo amigo! ⬇️",
+      "Aterrizaje con estilo… creo 😬",
+      "Parece que el suelo y yo seremos mejores amigos."
+    ],
+
+    // Clics
+    click1: [
+      "¡Hola otra vez! 🙌",
+      "¡Hey! ¿Me llamabas?",
+      "Podría hacer esto todo el día. 🦸‍♂️"
+    ],
+    click2: [
+      "¡Jajaja! ¡Cosquillas! 😂",
+      "¡Ay! ¡Eso hace cosquillas! 😆",
+      "No me hagas reír que relincho 🤭"
+    ],
+    click3: [
+      "¡Auxilio! ¡Me atacan a mimos! 😱",
+      "¡Exagerado yo? ¡Jamás! 😤 (bueno, un poquito)",
+      "¡Tres toques! Esto ya es amor 💘"
+    ],
+    click4plus: [
+      "Ok, creo que necesitas terapia… de juego 😜",
+      "Mmm… tanta insistencia. ¿Hablamos? 💬",
+      `Tal vez sea hora de elegir uno de nuestros <a href="${PLANS_ANCHOR}">planes</a> 📋`,
+      `Si necesitas ayuda, podemos hablar por <a href="${WHATSAPP_URL}" target="_blank">WhatsApp</a> 📲`
+    ],
+
+    // Muchos lanzamientos (meta)
+    manyLaunches: [
+      "Me mareas… en el buen sentido 😵‍💫",
+      "Si sigo girando, evoluciono a cometa 🪐",
+      `Tal vez sea hora de elegir uno de nuestros <a href="${PLANS_ANCHOR}">planes</a> 📋`,
+      `Si necesitas ayuda, podemos hablar por <a href="${WHATSAPP_URL}" target="_blank">WhatsApp</a> 📲`
+    ],
+
+    // Idle (mensajes aleatorios cada cierto tiempo)
+    idle: [
+      `Estamos felices de que estés aquí.🫂`,
+      `¿Listo para ver los <a href="${PLANS_ANCHOR}">planes</a>? 📋`,
+      `¿Hablamos por <a href="${WHATSAPP_URL}" target="_blank">WhatsApp</a>? 📲`
+    ]
+  };
+
+  // --------------------------- INFRA DE TEXTO ----------------------------
+  const lastShownIndex = {}; // por categoría
+  function pick(category, list) {
+    if (!list || list.length === 0) return "";
+    const last = lastShownIndex[category];
+    let idx;
+    if (list.length === 1) {
+      idx = 0;
+    } else {
+      do {
+        idx = Math.floor(Math.random() * list.length);
+      } while (idx === last);
+    }
+    lastShownIndex[category] = idx;
+    return list[idx];
   }
-}
 
-// En tu loop de movimiento del unicornio
-function updatePosition() {
-  // ... tu código de mover unicornio
-  unicorn.style.left = posX + "px";
-  unicorn.style.top = posY + "px";
+  function showFrom(category, duration = 3500) {
+    showBubble(pick(category, phrases[category]), duration);
+  }
 
-  // ahora actualizas la burbuja también
-  updateBubblePosition();
-}
- */
+  // ------------------------------- SETUP ---------------------------------
+  const unicorn = document.getElementById("unicorn-toy");
+  const bubble = document.getElementById("unicorn-bubble");
+  const bubbleText = document.getElementById("bubble-text");
+
+  let posX = 50, posY = 50;
+  let velX = 2, velY = 2;
+  const friction = 0.99;
+  const bounce = 0.8;
+
+  let dragging = false;
+  let offsetX, offsetY;
+  let lastMouseX, lastMouseY;
+  let lastMoveTime;
+
+  // Estado para lógica de mensajes
+  let lastCollisionAt = 0;
+  let lastCollisionSide = null; // "left" | "right" | "top" | "bottom"
+  let launchCount = 0;
+  let clickCount = 0;
+  let clickTimer = null;
+  
+  // NUEVO: Control de idle tras colisión
+  let allowIdle = true;
+  let waitingForIdle = false;
+
+  // --------------------------- BUBBLE RENDER -----------------------------
+  function showBubble(html, duration = 3500) {
+    bubbleText.innerHTML = html;
+    bubble.style.display = "flex";
+    // Posicionar junto al unicornio
+    bubble.style.left = posX + unicorn.offsetWidth + 12 + "px";
+    bubble.style.top = posY - 6 + "px";
+    bubble.style.display = "flex";
+    clearTimeout(showBubble._t);
+    showBubble._t = setTimeout(() => (bubble.style.display = "none"), duration);
+  }
+
+  function updateBubblePosition() {
+    if (bubble.style.display === "flex") {
+      bubble.style.left = posX + unicorn.offsetWidth + 12 + "px";
+      bubble.style.top = posY - 6 + "px";
+    }
+  }
+
+  // ----------------------------- FÍSICA ----------------------------------
+  function updatePosition() {
+    if (!dragging) {
+      posX += velX;
+      posY += velY;
+
+      const maxX = window.innerWidth - unicorn.offsetWidth;
+      const maxY = window.innerHeight - unicorn.offsetHeight;
+
+      // Detectar choques por lado con mensajes y cooldown
+      const now = Date.now();
+      const hitLeft = posX <= 0;
+      const hitRight = posX >= maxX;
+      const hitTop = posY <= 0;
+      const hitBottom = posY >= maxY;
+
+      if (hitLeft || hitRight) {
+        if (hitLeft) {
+          posX = Math.max(0, posX);
+          velX = -velX * bounce;
+          maybeSayCollision("left", now);
+        } else {
+          posX = Math.min(posX, maxX);
+          velX = -velX * bounce;
+          maybeSayCollision("right", now);
+        }
+      }
+      if (hitTop || hitBottom) {
+        if (hitTop) {
+          posY = Math.max(0, posY);
+          velY = -velY * bounce;
+          maybeSayCollision("top", now);
+        } else {
+          posY = Math.min(posY, maxY);
+          velY = -velY * bounce;
+          maybeSayCollision("bottom", now);
+        }
+      }
+
+      velX *= friction;
+      velY *= friction;
+    }
+
+    unicorn.style.left = posX + "px";
+    unicorn.style.top = posY + "px";
+    updateBubblePosition();
+
+    // NUEVO: Detectar si está quieto tras colisión
+    if (waitingForIdle && Math.abs(velX) < 0.5 && Math.abs(velY) < 0.5) {
+      allowIdle = true;
+      waitingForIdle = false;
+    }
+
+    requestAnimationFrame(updatePosition);
+  }
+
+  // NUEVO: contador de choques consecutivos
+  let collisionCount = 0;
+
+  function maybeSayCollision(side, now) {
+    const dt = now - lastCollisionAt;
+    const sideChanged = side !== lastCollisionSide;
+    const speedMag = Math.hypot(velX, velY);
+
+    if (dt > COLLISION_COOLDOWN || sideChanged || speedMag > LAUNCH_SPEED_THRESHOLD * 1.1) {
+      lastCollisionAt = now;
+      lastCollisionSide = side;
+      allowIdle = false;
+      waitingForIdle = true;
+
+      collisionCount++;
+
+      if (collisionCount <= 4) {
+        const suffix = collisionCount === 1 ? "" : ` x${collisionCount}`;
+        const ouchPhrase = `Ouch${suffix}`;
+        showBubble(ouchPhrase, 2000); // <-- usa showBubble directamente
+      } else {
+        // en el quinto choque (y siguientes): usar frases originales
+        collisionCount = 0;
+        switch (side) {
+          case "left":
+            showFrom("hitLeft");
+            break;
+          case "right":
+            showFrom("hitRight");
+            break;
+          case "top":
+            showFrom("hitTop");
+            break;
+          case "bottom":
+            showFrom("hitBottom");
+            break;
+        }
+      }
+    }
+  }
+
+  // --------------------------- INTERACCIONES -----------------------------
+  // Drag
+  unicorn.addEventListener("mousedown", startDrag);
+  unicorn.addEventListener("touchstart", startDrag, { passive: false });
+
+  function startDrag(e) {
+    e.preventDefault();
+    dragging = true;
+    unicorn.style.cursor = "grabbing";
+
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    offsetX = clientX - posX;
+    offsetY = clientY - posY;
+    lastMouseX = clientX;
+    lastMouseY = clientY;
+    lastMoveTime = Date.now();
+
+    document.addEventListener("mousemove", onDrag);
+    document.addEventListener("touchmove", onDrag, { passive: false });
+    document.addEventListener("mouseup", endDrag);
+    document.addEventListener("touchend", endDrag);
+
+    // Mensaje al iniciar drag
+    showFrom("dragStart", 1800);
+  }
+
+  function onDrag(e) {
+    e.preventDefault();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    const now = Date.now();
+    const deltaTime = now - lastMoveTime || 16;
+
+    velX = (clientX - lastMouseX) / (deltaTime / 16);
+    velY = (clientY - lastMouseY) / (deltaTime / 16);
+
+    // Limitar velocidad
+    velX = Math.max(Math.min(velX, SPEED_LIMIT), -SPEED_LIMIT);
+    velY = Math.max(Math.min(velY, SPEED_LIMIT), -SPEED_LIMIT);
+
+    posX = clientX - offsetX;
+    posY = clientY - offsetY;
+
+    lastMouseX = clientX;
+    lastMouseY = clientY;
+    lastMoveTime = now;
+  }
+
+  function endDrag() {
+    dragging = false;
+    unicorn.style.cursor = "grab";
+    document.removeEventListener("mousemove", onDrag);
+    document.removeEventListener("touchmove", onDrag);
+    document.removeEventListener("mouseup", endDrag);
+    document.removeEventListener("touchend", endDrag);
+
+    // Detectar "lanzamiento" por velocidad al soltar
+    const speed = Math.hypot(velX, velY);
+    if (speed > LAUNCH_SPEED_THRESHOLD) {
+      launchCount++;
+      // Reacciones metas/CTAs a partir de varios lanzamientos
+      if (launchCount === 3 || launchCount === 5 || launchCount >= 8) {
+        showFrom("manyLaunches", 4000);
+      } else if (Math.random() < 0.2) {
+        // pequeña probabilidad de comentar también
+        showFrom("dropPlayful", 4000);
+      }
+    } else {
+      showFrom("dropPlayful", 4000);
+    }
+  }
+
+  // Clics / taps en secuencia (1,2,3,4+)
+  unicorn.addEventListener("click", () => {
+    clickCount++;
+    if (clickTimer) clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => {
+      if (clickCount === 1) showFrom("click1", 1800);
+      else if (clickCount === 2) showFrom("click2", 2000);
+      else if (clickCount === 3) showFrom("click3", 2200);
+      else showFrom("click4plus", 2600);
+
+      clickCount = 0;
+      clickTimer = null;
+    }, CLICK_WINDOW);
+  });
+
+  // ----------------------------- CICLOS ----------------------------------
+  // Mensaje al cargar
+  window.addEventListener("load", () => {
+    setTimeout(() => showFrom("onLoad", 4000), 500);
+  });
+
+  // Idle (mensajes institucionales + CTA aleatorios)
+  setInterval(() => {
+    if (allowIdle) showFrom("idle", 3000);
+  }, IDLE_INTERVAL);
+
+  // ---------------------------- START LOOP -------------------------------
+  requestAnimationFrame(updatePosition);
+})();
