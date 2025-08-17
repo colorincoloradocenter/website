@@ -435,15 +435,13 @@ mediaFiles.forEach(fileName => {
     dragStart: [
       "¡Sujétame fuerte, que despego! 🚀",
       "¡Uuuh! ¡Vamos a dar una vuelta! 🎢",
-      "Con cuidado… soy delicado pero valiente 😌",
-      "#Siente el movimiento"
+      "Con cuidado… soy delicado pero valiente 😌"
     ],
 
     dropPlayful: [
-      "¡Aterrizaje perfecto! 🛬",
       "¡Eso estuvo cerca! 😵‍💫",
       "¡Qué lanzamiento! Deberías unirte al equipo 😎",
-      "Me dejaste con brillantina en el aire ✨"
+      "Luego tendremos una sesión. 😄"
     ],
 
     // Choques por borde
@@ -555,16 +553,19 @@ mediaFiles.forEach(fileName => {
   let waitingForIdle = false;
 
   // --------------------------- BUBBLE RENDER -----------------------------
-  function showBubble(html, duration = 3500) {
-    bubbleText.innerHTML = html;
-    bubble.style.display = "flex";
-    // Posicionar junto al unicornio
-    bubble.style.left = posX + unicorn.offsetWidth + 12 + "px";
-    bubble.style.top = posY - 6 + "px";
-    bubble.style.display = "flex";
-    clearTimeout(showBubble._t);
-    showBubble._t = setTimeout(() => (bubble.style.display = "none"), duration);
+function showBubble(html, duration = 3500) {
+  // Solo mostrar en escritorio (ejemplo: ancho mayor a 768px)
+  if (window.innerWidth < 768) {
+    bubble.style.display = "none";
+    return;
   }
+  bubbleText.innerHTML = html;
+  bubble.style.display = "flex";
+  bubble.style.left = posX + unicorn.offsetWidth + 12 + "px";
+  bubble.style.top = posY - 6 + "px";
+  clearTimeout(showBubble._t);
+  showBubble._t = setTimeout(() => (bubble.style.display = "none"), duration);
+}
 
   function updateBubblePosition() {
     if (bubble.style.display === "flex") {
