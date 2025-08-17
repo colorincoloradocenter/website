@@ -553,9 +553,16 @@ mediaFiles.forEach(fileName => {
   let waitingForIdle = false;
 
   // --------------------------- BUBBLE RENDER -----------------------------
+function isMobileDevice() {
+  return (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+    ('ontouchstart' in window && !window.navigator.maxTouchPoints)
+  );
+}
+
 function showBubble(html, duration = 3500) {
-  // Solo mostrar en escritorio (ejemplo: ancho mayor a 768px)
-  if (window.innerWidth < 768) {
+  // Solo mostrar en escritorio, no en móvil/táctil
+  if (isMobileDevice()) {
     bubble.style.display = "none";
     return;
   }
