@@ -1,0 +1,30 @@
+#photos-welcome {
+  position: relative;
+  background: linear-gradient(24deg, #d2d6ef, #e1e5f0, #8cb7ca);
+  padding: 5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.media-card {
+  width: 250px;
+  height: 280px;
+  border-radius: 35px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
+
+.media-card:hover {
+  transform: scale(1.05);
+}
+
+.media-card img,
+.media-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+}

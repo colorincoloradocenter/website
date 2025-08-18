@@ -9,12 +9,7 @@
     <script async src="//www.instagram.com/embed.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&display=swap" rel="stylesheet">
+
 
     <link rel="stylesheet" href="src/styles/style.css" />
 
@@ -27,15 +22,16 @@
     <meta property="og:type" content="website">
 </head>
 
-<img id="unicorn-toy" src="public/stickers/unicorn_1.gif" class="unicorn-gif" alt="Unicornio" style="position:fixed; left:50px; top:50px; z-index:999; cursor:grab;">
-<div id="unicorn-bubble" class="speech-bubble" style="display:none; position:fixed; z-index:1000;">
-  <span id="bubble-text"></span>
-</div>
-
 <body class="min-h-screen flex flex-col">
     <canvas id="universe"></canvas>
 
     <header class="fixed top-0 left-0 w-full z-50 header-theme">
+
+    <img id="unicorn-toy" src="public/stickers/unicorn_1.gif" class="unicorn-gif" alt="Unicornio" style="position:fixed; left:50px; top:50px; z-index:999; cursor:grab;">
+        <div id="unicorn-bubble" class="speech-bubble" style="display:none; position:fixed; z-index:1000;">
+        <span id="bubble-text"></span>
+    </div>  
+    
     <div class="max-w-7xl mx-auto flex justify-between items-center py-4 px-6">
         <h1 class="header-text text-xl font-bold">
             <span class="block font-thin text-sm">Centro Psicológico</span>
@@ -71,20 +67,20 @@
         </div>
     </section>
 
-<section id="Instagram">   
-    <div class="flex justify-center w-full relative py-12 gap-4">
-        <blockquote class="instagram-media" 
-            data-instgrm-captioned 
-            data-instgrm-permalink="https://www.instagram.com/reel/DH9yy-vvry8/?utm_source=ig_embed&amp;utm_campaign=loading" 
-            data-instgrm-version="14"
-            style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px rgba(0,0,0,0.5),0 1px 5px rgba(0,0,0,0.15); margin:1px; max-width:280px; min-width:200px; padding:0; width:100%;">
-            <a href="https://www.instagram.com/reel/DH9yy-vvry8/?utm_source=ig_embed&amp;utm_campaign=loading" 
-               style="background:#FFF; line-height:0; text-align:center; text-decoration:none; width:100%;" target="_blank">
-                <div style="padding-top:100%;"></div>
-            </a>
-        </blockquote>
-    </div>
-</section>
+    <section id="Instagram">   
+        <div class="flex justify-center w-full relative py-12 gap-4">
+            <blockquote class="instagram-media" 
+                data-instgrm-captioned 
+                data-instgrm-permalink="https://www.instagram.com/reel/DH9yy-vvry8/?utm_source=ig_embed&amp;utm_campaign=loading" 
+                data-instgrm-version="14"
+                style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px rgba(0,0,0,0.5),0 1px 5px rgba(0,0,0,0.15); margin:1px; max-width:280px; min-width:200px; padding:0; width:100%;">
+                <a href="https://www.instagram.com/reel/DH9yy-vvry8/?utm_source=ig_embed&amp;utm_campaign=loading" 
+                style="background:#FFF; line-height:0; text-align:center; text-decoration:none; width:100%;" target="_blank">
+                    <div style="padding-top:100%;"></div>
+                </a>
+            </blockquote>
+        </div>
+    </section>
 
 
     <section id="planes" class="p-5 mt-auto mb-16">
@@ -132,6 +128,7 @@
         </div>
     </footer>
 
-    <script src="src/scripts/main.js"></script>
+    <script type="module" src="src/scripts/main.js"></script>
+
 </body>
 </html>
