@@ -1,4 +1,20 @@
 export function initUniverse() {
+    window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+
+    let speedFactor;
+    if (window.innerWidth >= 1200) {
+        speedFactor = 0.1;
+    } else if (window.innerWidth >= 768) {
+        speedFactor = 0.07;
+    } else {
+        speedFactor = 0.045;
+    }
+
+    const angle = 24 + scrollY * speedFactor;
+    document.body.style.background = `linear-gradient(${angle}deg, #010a13, #22212f, #473545, #0a2036, #030f1c)`;
+    });
+
     // configuraciones
     let starDensity = 0.15;
     let speedCoeff = 0.03;
@@ -55,7 +71,7 @@ export function initUniverse() {
             this.comet = this.giant || first ? false : getProbability(10);
             this.x = getRandInterval(0, width);
             this.y = getRandInterval(0, height);
-            this.r = getRandInterval(1.1, 2.6);
+            this.r = getRandInterval(1, 2.6);
             this.dx = getRandInterval(speedCoeff, 6 * speedCoeff)
                 + (this.comet ? speedCoeff * getRandInterval(50, 120) : 0)
                 + speedCoeff * 2;
