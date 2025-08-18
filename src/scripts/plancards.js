@@ -15,7 +15,7 @@ export function initPlancards() {
 
     plans.forEach(plan => {
         const card = `
-            <div class="bg-[#0d0e0e]/90 text-white rounded-[35px] shadow-lg p-8 flex flex-col justify-between transform transition-transform duration-300 hover:scale-105">
+            <div class="plan-card bg-[#0d0e0e]/90 text-white rounded-[35px] shadow-lg p-8 flex flex-col justify-between transform transition-transform duration-300 hover:scale-105">
                 <div class="flex flex-col items-center">
                     <h3 class="plan-title text-lg font-normal text-[#c4c4c4]">${plan.tipo}</h3>
                     <h3 class="plan-title text-xl font-bold -mt-1 mb-4">${plan.nombre}</h3>
@@ -34,5 +34,26 @@ export function initPlancards() {
             </div>
         `;
         container.insertAdjacentHTML("beforeend", card);
+    });
+    // --- efecto ripple ---
+    const cards = document.querySelectorAll(".plan-card");
+    cards.forEach(card => {
+        card.addEventListener("click", function(e) {
+            // Evitar que se active si se hace click en el botón interno
+            if (e.target.tagName.toLowerCase() === "a") return;
+
+            const ripple = document.createElement("span");
+            ripple.classList.add("ripple");
+
+            const rect = card.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + "px";
+            ripple.style.left = (e.clientX - rect.left - size / 2) + "px";
+            ripple.style.top = (e.clientY - rect.top - size / 2) + "px";
+
+            card.appendChild(ripple);
+
+            setTimeout(() => ripple.remove(), 600);
+        });
     });
 }

@@ -13,7 +13,7 @@ export function initPhotos() {
 
         let mediaTag = "";
         if (["jpg", "jpeg", "png", "gif", "webp"].includes(ext)) {
-            mediaTag = `<img data-src="${filePath}" alt="">`;
+            mediaTag = `<img data-src="${filePath}" alt="" oncontextmenu="return false;" draggable="false">`;
         } else if (["mp4", "webm", "ogg"].includes(ext)) {
             mediaTag = `
             <video controls preload="none" data-src="${filePath}">
@@ -25,7 +25,6 @@ export function initPhotos() {
         photosContainer.innerHTML += mediaCard;
     });
 
-    // 🚀 Lazy load con IntersectionObserver
     const lazyMedia = photosContainer.querySelectorAll("img[data-src], video[data-src]");
     const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
