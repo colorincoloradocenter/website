@@ -35,11 +35,10 @@ export function initPlancards() {
         `;
         container.insertAdjacentHTML("beforeend", card);
     });
-    // --- efecto ripple ---
+
     const cards = document.querySelectorAll(".plan-card");
     cards.forEach(card => {
         card.addEventListener("click", function(e) {
-            // Evitar que se active si se hace click en el botón interno
             if (e.target.tagName.toLowerCase() === "a") return;
 
             const ripple = document.createElement("span");
