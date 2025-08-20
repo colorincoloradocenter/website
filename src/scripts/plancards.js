@@ -15,7 +15,7 @@ export function initPlancards() {
 
     plans.forEach(plan => {
         const card = `
-            <div class="plan-card bg-[#0d0e0e]/90 text-white rounded-[35px] shadow-lg p-8 flex flex-col justify-between transform transition-transform duration-300 hover:scale-105">
+            <div class="plan-card bg-[#0d0e0e]/90 text-white rounded-[35px] p-8 flex flex-col justify-between transform transition-transform duration-300 hover:scale-105">
                 <div class="flex flex-col items-center">
                     <h3 class="plan-title text-lg font-normal text-[#c4c4c4]">${plan.tipo}</h3>
                     <h3 class="plan-title text-xl font-bold -mt-1 mb-4">${plan.nombre}</h3>

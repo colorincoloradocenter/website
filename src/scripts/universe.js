@@ -1,54 +1,45 @@
 export function initUniverse() {
+    
     window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-const maxScroll = 2000;
-const t = Math.min(scrollY / maxScroll, 1);
+        const scrollY = window.scrollY;
+        const maxScroll = 2000;
+        const t = Math.min(scrollY / maxScroll, 1);
 
-    let speedFactor;
-    if (window.innerWidth >= 1200) {
-        speedFactor = 0.1;
-    } else if (window.innerWidth >= 768) {
-        speedFactor = 0.07;
-    } else {
-        speedFactor = 0.045;
-    }
+        let speedFactor;
+        if (window.innerWidth >= 1200) speedFactor = 0.1;
+        else if (window.innerWidth >= 768) speedFactor = 0.07;
+        else speedFactor = 0.045;
 
-    const angle = 24 + scrollY * speedFactor;
-    const color1 = `rgba(${5 + 20 * t},${8 + 30 * t},${15 + 60 * t},1)`;
-    const color2 = `rgba(${18 + 80 * t},${16 + 60 * t},${25 + 80 * t},1)`;
-    const color3 = `rgba(${30 + 40 * t},${22 + 40 * t},${35 + 80 * t},1)`;
-    document.body.style.background = `linear-gradient(24deg, ${color1}, ${color2}, ${color3})`;
+        const color1 = `rgba(${5 + 20 * t},${8 + 30 * t},${15 + 60 * t},1)`;
+        const color2 = `rgba(${18 + 80 * t},${16 + 60 * t},${25 + 80 * t},1)`;
+        const color3 = `rgba(${30 + 40 * t},${22 + 40 * t},${35 + 80 * t},1)`;
+        document.body.style.background = `linear-gradient(24deg, ${color1}, ${color2}, ${color3})`;
     });
 
-    let starDensity = 0.4;
-    let speedCoeff = 0.035;
-    let width, height, starCount;
+    const STAR_DENSITY = 0.0001; 
+    let speedCoeff = 0.037;
+
+    let width, height;
     let first = true;
     const giantColor = '180,184,240';
     const starColor = '226,225,142';
     const cometColor = '226,225,224';
     const canva = document.getElementById('universe');
     const stars = [];
-    let fps = 60;
+
+    let bufferX = 0, bufferY = 0;
+    let world = { left: 0, right: 0, top: 0, bottom: 0 };
 
     if (!canva) return;
 
     if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) {
-        starDensity = 0.1;
         speedCoeff = 0.02;
-        fps = 30;
     }
 
-    let universe = canva.getContext('2d');
+    const universe = canva.getContext('2d');
 
-    windowResizeHandler();
-    window.addEventListener('resize', windowResizeHandler, false);
-
-    for (let i = 0; i < starCount; i++) {
-        stars[i] = new Star();
-        stars[i].reset();
-    }
-
+    windowResizeHandler(true);
+    setTimeout(() => windowResizeHandler(false), 50);
     draw();
 
     function draw() {
@@ -64,9 +55,9 @@ const t = Math.min(scrollY / maxScroll, 1);
         if (window.unicornDragDX || window.unicornDragDY) {
             window.unicornOffsetX -= window.unicornDragDX * 0.95;
             window.unicornOffsetY -= window.unicornDragDY * 0.95;
-
             window.unicornDragDX *= 0.92;
             window.unicornDragDY *= 0.92;
+
             if (Math.abs(window.unicornDragDX) < 0.01) window.unicornDragDX = 0;
             if (Math.abs(window.unicornDragDY) < 0.01) window.unicornDragDY = 0;
 
@@ -90,11 +81,13 @@ const t = Math.min(scrollY / maxScroll, 1);
             }
         }
 
-        const parallax = 0.5;
+        const parallax = 0.55;
+
+        ensureCoverage(parallax);
 
         for (let star of stars) {
-            let drawX = star.x + window.unicornOffsetX * parallax + (shake ? (Math.random() - 0.5) * shake : 0);
-            let drawY = star.y + window.unicornOffsetY * parallax + (shake ? (Math.random() - 0.5) * shake : 0);
+            const drawX = star.x + window.unicornOffsetX * parallax + (shake ? (Math.random() - 0.5) * shake : 0);
+            const drawY = star.y + window.unicornOffsetY * parallax + (shake ? (Math.random() - 0.5) * shake : 0);
 
             star.move();
             star.fadeIn();
@@ -127,8 +120,8 @@ const t = Math.min(scrollY / maxScroll, 1);
         this.reset = () => {
             this.giant = getProbability(3);
             this.comet = this.giant || first ? false : getProbability(10);
-            this.x = getRandInterval(0, width);
-            this.y = getRandInterval(0, height);
+            this.x = getRandInterval(world.left, world.right);
+            this.y = getRandInterval(world.top, world.bottom);
             this.r = getRandInterval(1, 2.6);
             this.dx = getRandInterval(speedCoeff, 6 * speedCoeff)
                 + (this.comet ? speedCoeff * getRandInterval(50, 120) : 0)
@@ -153,86 +146,110 @@ const t = Math.min(scrollY / maxScroll, 1);
             if (this.fadingOut) {
                 this.fadingOut = this.opacity < 0 ? false : true;
                 this.opacity -= this.do / 2;
-                if (this.x > width || this.y < 0) {
+                if (this.x > world.right || this.y < world.top) {
                     this.fadingOut = false;
                     this.reset();
                 }
             }
         };
 
-        this.draw = () => {
-            universe.beginPath();
-
-            if (this.giant) {
-                universe.fillStyle = `rgba(${giantColor},${this.opacity})`;
-                universe.arc(this.x, this.y, 2, 0, 2 * Math.PI, false);
-            } else if (this.comet) {
-                universe.fillStyle = `rgba(${cometColor},${this.opacity})`;
-                universe.arc(this.x, this.y, 1.5, 0, 2 * Math.PI, false);
-
-                for (let i = 0; i < 30; i++) {
-                    universe.fillStyle = `rgba(${cometColor},${this.opacity - (this.opacity / 20) * i})`;
-                    universe.rect(this.x - this.dx / 4 * i, this.y - this.dy / 4 * i - 2, 2, 2);
-                    universe.fill();
-                }
-            } else {
-                universe.fillStyle = `rgba(${starColor},${this.opacity})`;
-                universe.rect(this.x, this.y, this.r, this.r);
-            }
-
-            universe.closePath();
-            universe.fill();
-        };
-
         this.move = () => {
             this.x += this.dx;
             this.y += this.dy;
-            if (this.fadingOut === false) {
-                this.reset();
-            }
-            if (this.x > width || this.y < 0) {
-                this.fadingOut = true;
-            }
+            if (this.fadingOut === false) this.reset();
+            if (this.x > world.right || this.y < world.top) this.fadingOut = true;
         };
 
         setTimeout(() => { first = false; }, 50);
     }
 
-    function getProbability(percents) {
-        return ((Math.floor(Math.random() * 1000) + 1) < percents * 10);
+    function desiredCount() {
+        const w = world.right - world.left;
+        const h = world.bottom - world.top;
+        return Math.floor(w * h * STAR_DENSITY);
     }
 
-    function getRandInterval(min, max) {
-        return (Math.random() * (max - min) + min);
+    function setWorldBounds() {
+        bufferX = Math.ceil(window.innerWidth);
+        bufferY = Math.ceil(window.innerHeight);
+        world.left = -bufferX;
+        world.right = width + bufferX;
+        world.top = -bufferY;
+        world.bottom = height + bufferY;
     }
 
-    function windowResizeHandler() {
+    function fillStarsArea(x0, y0, x1, y1) {
+        const area = Math.max(0, x1 - x0) * Math.max(0, y1 - y0);
+        if (area <= 0) return;
+        const need = Math.floor(area * STAR_DENSITY);
+        for (let i = 0; i < need; i++) {
+            const s = new Star();
+            s.reset();
+            s.x = getRandInterval(x0, x1);
+            s.y = getRandInterval(y0, y1);
+            stars.push(s);
+        }
+    }
+
+    function windowResizeHandler(firstTime = false) {
         width = window.innerWidth;
+
         const footer = document.getElementById('footer');
         const footerTop = footer ? footer.getBoundingClientRect().top + window.scrollY : window.innerHeight;
         height = Math.max(window.innerHeight, footerTop);
-        starCount = width * starDensity;
+
         canva.width = width;
         canva.height = height;
+
+        const oldWorld = { ...world };
+        setWorldBounds();
+
+        if (firstTime) {
+            fillStarsArea(world.left, world.top, world.right, world.bottom);
+        } else {
+            if (world.left < oldWorld.left) fillStarsArea(world.left, world.top, oldWorld.left, world.bottom);
+            if (world.right > oldWorld.right) fillStarsArea(oldWorld.right, world.top, world.right, world.bottom);
+            if (world.top < oldWorld.top) fillStarsArea(world.left, world.top, world.right, oldWorld.top);
+            if (world.bottom > oldWorld.bottom) fillStarsArea(world.left, oldWorld.bottom, world.right, world.bottom);
+
+            const want = desiredCount();
+            if (stars.length > want) stars.length = want;
+            else if (stars.length < want) fillStarsArea(world.left, world.top, world.right, world.bottom);
+        }
     }
 
-    window.addEventListener('scroll', () => {
-        const footer = document.getElementById('footer');
-        const footerTop = footer ? footer.getBoundingClientRect().top + window.scrollY : height;
-        const newHeight = Math.max(window.innerHeight, window.scrollY + window.innerHeight, footerTop);
+    function ensureCoverage(parallax) {
+        const viewLeft = -window.unicornOffsetX * parallax;
+        const viewTop = -window.unicornOffsetY * parallax;
+        const viewRight = viewLeft + width;
+        const viewBottom = viewTop + height;
 
-        if (newHeight > height) {
-            canva.height = newHeight;
-            const extraStars = Math.floor((newHeight - height) * starDensity);
-            for (let i = 0; i < extraStars; i++) {
-                const s = new Star();
-                s.reset();
-                s.x = getRandInterval(0, width);
-                s.y = getRandInterval(height, newHeight);
-                stars.push(s);
-            }
-            height = newHeight;
-            starCount = width * starDensity;
+        const marginX = bufferX * 0.4;
+        const marginY = bufferY * 0.4;
+
+        let expanded = false;
+        const old = { ...world };
+
+        if (viewLeft < world.left + marginX) { world.left -= bufferX; expanded = true; }
+        if (viewRight > world.right - marginX) { world.right += bufferX; expanded = true; }
+        if (viewTop < world.top + marginY) { world.top -= bufferY; expanded = true; }
+        if (viewBottom > world.bottom - marginY) { world.bottom += bufferY; expanded = true; }
+
+        if (expanded) {
+            if (world.left < old.left) fillStarsArea(world.left, world.top, old.left, world.bottom);
+            if (world.right > old.right) fillStarsArea(old.right, world.top, world.right, world.bottom);
+            if (world.top < old.top) fillStarsArea(world.left, world.top, world.right, old.top);
+            if (world.bottom > old.bottom) fillStarsArea(world.left, old.bottom, world.right, world.bottom);
+
+            const want = desiredCount();
+            if (stars.length > want * 1.25) stars.length = Math.floor(want * 1.25);
         }
-    });
+    }
+    function getProbability(percents) {
+        return ((Math.floor(Math.random() * 1000) + 1) < percents * 10);
+    }
+    function getRandInterval(min, max) {
+        return (Math.random() * (max - min) + min);
+    }
+    window.addEventListener('resize', () => windowResizeHandler(false));
 }
