@@ -20,8 +20,8 @@ const t = Math.min(scrollY / maxScroll, 1);
     document.body.style.background = `linear-gradient(24deg, ${color1}, ${color2}, ${color3})`;
     });
 
-    let starDensity = 0.15;
-    let speedCoeff = 0.03;
+    let starDensity = 0.4;
+    let speedCoeff = 0.035;
     let width, height, starCount;
     let first = true;
     const giantColor = '180,184,240';
@@ -90,9 +90,11 @@ const t = Math.min(scrollY / maxScroll, 1);
             }
         }
 
+        const parallax = 0.5;
+
         for (let star of stars) {
-            let drawX = star.x - window.unicornOffsetX + (shake ? (Math.random() - 0.5) * shake : 0);
-            let drawY = star.y - window.unicornOffsetY + (shake ? (Math.random() - 0.5) * shake : 0);
+            let drawX = star.x + window.unicornOffsetX * parallax + (shake ? (Math.random() - 0.5) * shake : 0);
+            let drawY = star.y + window.unicornOffsetY * parallax + (shake ? (Math.random() - 0.5) * shake : 0);
 
             star.move();
             star.fadeIn();
