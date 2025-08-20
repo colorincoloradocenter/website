@@ -44,26 +44,28 @@ export function initUniverse() {
 
     function draw() {
         universe.clearRect(0, 0, width, height);
-
         const shake = window.isUnicornShaking ? 2 : 0;
         window.unicornDragDX = window.unicornDragDX || 0;
         window.unicornDragDY = window.unicornDragDY || 0;
         window.unicornOffsetX = window.unicornOffsetX || 0;
         window.unicornOffsetY = window.unicornOffsetY || 0;
         window.isUniverseReturning = window.isUniverseReturning || false;
+        window.isUnicornHeld = window.isUnicornHeld || false; // 👈 nueva bandera global
 
-        if (window.unicornDragDX || window.unicornDragDY) {
-            window.unicornOffsetX -= window.unicornDragDX * 0.95;
-            window.unicornOffsetY -= window.unicornDragDY * 0.95;
-            window.unicornDragDX *= 0.92;
-            window.unicornDragDY *= 0.92;
+        if (!window.isUnicornHeld) {
+            if (window.unicornDragDX || window.unicornDragDY) {
+                window.unicornOffsetX -= window.unicornDragDX * 0.95;
+                window.unicornOffsetY -= window.unicornDragDY * 0.95;
+                window.unicornDragDX *= 0.92;
+                window.unicornDragDY *= 0.92;
 
-            if (Math.abs(window.unicornDragDX) < 0.01) window.unicornDragDX = 0;
-            if (Math.abs(window.unicornDragDY) < 0.01) window.unicornDragDY = 0;
+                if (Math.abs(window.unicornDragDX) < 0.01) window.unicornDragDX = 0;
+                if (Math.abs(window.unicornDragDY) < 0.01) window.unicornDragDY = 0;
 
-            if (window.unicornDragDX === 0 && window.unicornDragDY === 0 &&
-                (Math.abs(window.unicornOffsetX) > 0.5 || Math.abs(window.unicornOffsetY) > 0.5)) {
-                window.isUniverseReturning = true;
+                if (window.unicornDragDX === 0 && window.unicornDragDY === 0 &&
+                    (Math.abs(window.unicornOffsetX) > 0.5 || Math.abs(window.unicornOffsetY) > 0.5)) {
+                    window.isUniverseReturning = true;
+                }
             }
         }
 

@@ -21,39 +21,39 @@ export function initUnicorn(){
         //FÍSICA
         function updatePosition() {
             if (!dragging) {
-            posX += velX;
-            posY += velY;
+                posX += velX;
+                posY += velY;
 
-            const maxX = window.innerWidth - unicorn.offsetWidth;
-            const maxY = window.innerHeight - unicorn.offsetHeight;
+                const maxX = window.innerWidth - unicorn.offsetWidth;
+                const maxY = window.innerHeight - unicorn.offsetHeight;
 
-            // efecto liga en eje X
-            if (posX < -maxStretch) posX = -maxStretch;
-            if (posX > maxX + maxStretch) posX = maxX + maxStretch;
+                // efecto liga en eje X
+                if (posX < -maxStretch) posX = -maxStretch;
+                if (posX > maxX + maxStretch) posX = maxX + maxStretch;
 
-            if (posX < 0) {
-                velX += -posX * springStrength;
-            } else if (posX > maxX) {
-                velX += (maxX - posX) * springStrength;
-            }
+                if (posX < 0) {
+                    velX += -posX * springStrength;
+                } else if (posX > maxX) {
+                    velX += (maxX - posX) * springStrength;
+                }
 
-            // efecto liga en eje Y
-            if (posY < -maxStretch) posY = -maxStretch;
-            if (posY > maxY + maxStretch) posY = maxY + maxStretch;
+                // efecto liga en eje Y
+                if (posY < -maxStretch) posY = -maxStretch;
+                if (posY > maxY + maxStretch) posY = maxY + maxStretch;
 
-            if (posY < 0) {
-                velY += -posY * springStrength;
-            } else if (posY > maxY) {
-                velY += (maxY - posY) * springStrength;
-            }
+                if (posY < 0) {
+                    velY += -posY * springStrength;
+                } else if (posY > maxY) {
+                    velY += (maxY - posY) * springStrength;
+                }
 
-            // fricción + rebotes más suaves
-            velX *= friction;
-            velY *= friction;
+                // fricción + rebotes más suaves
+                velX *= friction;
+                velY *= friction;
 
-            // limitar velocidad
-            velX = Math.max(Math.min(velX, SPEED_LIMIT), -SPEED_LIMIT);
-            velY = Math.max(Math.min(velY, SPEED_LIMIT), -SPEED_LIMIT);
+                // limitar velocidad
+                velX = Math.max(Math.min(velX, SPEED_LIMIT), -SPEED_LIMIT);
+                velY = Math.max(Math.min(velY, SPEED_LIMIT), -SPEED_LIMIT);
             }
 
             unicorn.style.left = posX + "px";
@@ -69,7 +69,8 @@ export function initUnicorn(){
         function startDrag(e) {
             e.preventDefault();
             dragging = true;
-            window.isUnicornShaking = true; // <-- activa temblor
+            window.isUnicornHeld = true;      // 👈 señal para universe.js
+            window.isUnicornShaking = true;   // temblor visual
             unicorn.style.cursor = "grabbing";
 
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -105,20 +106,21 @@ export function initUnicorn(){
             lastMouseY = clientY;
             lastMoveTime = now;
 
+            // guardar la velocidad para universe.js (solo se usará al soltar)
             window.unicornDragDX = velX;
             window.unicornDragDY = velY;
         }
 
-function endDrag() {
-    dragging = false;
-    window.isUnicornShaking = false;
-    // NO reasignes unicornDragDX/unicornDragDY aquí
-    unicorn.style.cursor = "grab";
-    document.removeEventListener("mousemove", onDrag);
-    document.removeEventListener("touchmove", onDrag);
-    document.removeEventListener("mouseup", endDrag);
-    document.removeEventListener("touchend", endDrag);
-}
+        function endDrag() {
+            dragging = false;
+            window.isUnicornHeld = false;     // 👈 liberamos, ahora universe.js usa inercia
+            window.isUnicornShaking = false;
+            unicorn.style.cursor = "grab";
+            document.removeEventListener("mousemove", onDrag);
+            document.removeEventListener("touchmove", onDrag);
+            document.removeEventListener("mouseup", endDrag);
+            document.removeEventListener("touchend", endDrag);
+        }
 
         //START LOOP
         requestAnimationFrame(updatePosition);
