@@ -54,11 +54,68 @@ const t = Math.min(scrollY / maxScroll, 1);
     function draw() {
         universe.clearRect(0, 0, width, height);
 
+        const shake = window.isUnicornShaking ? 2 : 0;
+        window.unicornDragDX = window.unicornDragDX || 0;
+        window.unicornDragDY = window.unicornDragDY || 0;
+        window.unicornOffsetX = window.unicornOffsetX || 0;
+        window.unicornOffsetY = window.unicornOffsetY || 0;
+        window.isUniverseReturning = window.isUniverseReturning || false;
+
+        if (window.unicornDragDX || window.unicornDragDY) {
+            window.unicornOffsetX -= window.unicornDragDX * 0.95;
+            window.unicornOffsetY -= window.unicornDragDY * 0.95;
+
+            window.unicornDragDX *= 0.92;
+            window.unicornDragDY *= 0.92;
+            if (Math.abs(window.unicornDragDX) < 0.01) window.unicornDragDX = 0;
+            if (Math.abs(window.unicornDragDY) < 0.01) window.unicornDragDY = 0;
+
+            if (window.unicornDragDX === 0 && window.unicornDragDY === 0 &&
+                (Math.abs(window.unicornOffsetX) > 0.5 || Math.abs(window.unicornOffsetY) > 0.5)) {
+                window.isUniverseReturning = true;
+            }
+        }
+
+        if (window.isUniverseReturning) {
+            const returnSpeed = 0.01;
+            const dx = window.unicornOffsetX * returnSpeed;
+            const dy = window.unicornOffsetY * returnSpeed;
+            window.unicornOffsetX -= dx;
+            window.unicornOffsetY -= dy;
+
+            if (Math.abs(window.unicornOffsetX) < 1 && Math.abs(window.unicornOffsetY) < 1) {
+                window.unicornOffsetX = 0;
+                window.unicornOffsetY = 0;
+                window.isUniverseReturning = false;
+            }
+        }
+
         for (let star of stars) {
+            let drawX = star.x - window.unicornOffsetX + (shake ? (Math.random() - 0.5) * shake : 0);
+            let drawY = star.y - window.unicornOffsetY + (shake ? (Math.random() - 0.5) * shake : 0);
+
             star.move();
             star.fadeIn();
             star.fadeOut();
-            star.draw();
+
+            universe.beginPath();
+            if (star.giant) {
+                universe.fillStyle = `rgba(180,184,240,${star.opacity})`;
+                universe.arc(drawX, drawY, 2, 0, 2 * Math.PI);
+            } else if (star.comet) {
+                universe.fillStyle = `rgba(226,225,224,${star.opacity})`;
+                universe.arc(drawX, drawY, 1.5, 0, 2 * Math.PI);
+                for (let i = 0; i < 30; i++) {
+                    universe.fillStyle = `rgba(226,225,224,${star.opacity - (star.opacity / 20) * i})`;
+                    universe.rect(drawX - star.dx / 4 * i, drawY - star.dy / 4 * i - 2, 2, 2);
+                    universe.fill();
+                }
+            } else {
+                universe.fillStyle = `rgba(226,225,142,${star.opacity})`;
+                universe.rect(drawX, drawY, star.r, star.r);
+            }
+            universe.closePath();
+            universe.fill();
         }
 
         requestAnimationFrame(draw);

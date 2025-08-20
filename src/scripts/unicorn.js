@@ -1,13 +1,13 @@
 export function initUnicorn(){
     (function () {
-        // ------------------------------ CONFIG ---------------------------------
+        //CONFIG
         const SPEED_LIMIT = 18;
         const friction = 0.98;
         const bounce = 0.85;
-        const springStrength = 0.1; // fuerza de "liga"
-        const maxStretch = 120;     // qué tanto se puede estirar fuera de pantalla
+        const springStrength = 0.1; 
+        const maxStretch = 120;  
 
-        // ------------------------------- SETUP ---------------------------------
+        //SETUP
         const unicorn = document.getElementById("unicorn-toy");
 
         let posX = 200, posY = 200;
@@ -18,7 +18,7 @@ export function initUnicorn(){
         let lastMouseX, lastMouseY;
         let lastMoveTime;
 
-        // ----------------------------- FÍSICA ----------------------------------
+        //FÍSICA
         function updatePosition() {
             if (!dragging) {
             posX += velX;
@@ -27,7 +27,7 @@ export function initUnicorn(){
             const maxX = window.innerWidth - unicorn.offsetWidth;
             const maxY = window.innerHeight - unicorn.offsetHeight;
 
-            // --- efecto liga en eje X ---
+            // efecto liga en eje X
             if (posX < -maxStretch) posX = -maxStretch;
             if (posX > maxX + maxStretch) posX = maxX + maxStretch;
 
@@ -37,7 +37,7 @@ export function initUnicorn(){
                 velX += (maxX - posX) * springStrength;
             }
 
-            // --- efecto liga en eje Y ---
+            // efecto liga en eje Y
             if (posY < -maxStretch) posY = -maxStretch;
             if (posY > maxY + maxStretch) posY = maxY + maxStretch;
 
@@ -62,13 +62,14 @@ export function initUnicorn(){
             requestAnimationFrame(updatePosition);
         }
 
-        // --------------------------- INTERACCIONES -----------------------------
+        //INTERACCIONES
         unicorn.addEventListener("mousedown", startDrag);
         unicorn.addEventListener("touchstart", startDrag, { passive: false });
 
         function startDrag(e) {
             e.preventDefault();
             dragging = true;
+            window.isUnicornShaking = true; // <-- activa temblor
             unicorn.style.cursor = "grabbing";
 
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -103,18 +104,23 @@ export function initUnicorn(){
             lastMouseX = clientX;
             lastMouseY = clientY;
             lastMoveTime = now;
+
+            window.unicornDragDX = velX;
+            window.unicornDragDY = velY;
         }
 
-        function endDrag() {
-            dragging = false;
-            unicorn.style.cursor = "grab";
-            document.removeEventListener("mousemove", onDrag);
-            document.removeEventListener("touchmove", onDrag);
-            document.removeEventListener("mouseup", endDrag);
-            document.removeEventListener("touchend", endDrag);
-        }
+function endDrag() {
+    dragging = false;
+    window.isUnicornShaking = false;
+    // NO reasignes unicornDragDX/unicornDragDY aquí
+    unicorn.style.cursor = "grab";
+    document.removeEventListener("mousemove", onDrag);
+    document.removeEventListener("touchmove", onDrag);
+    document.removeEventListener("mouseup", endDrag);
+    document.removeEventListener("touchend", endDrag);
+}
 
-        // ---------------------------- START LOOP -------------------------------
+        //START LOOP
         requestAnimationFrame(updatePosition);
     })();
 }
