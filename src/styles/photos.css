@@ -1,6 +1,5 @@
 #photos-welcome {
   position: relative;
-  background: linear-gradient(24deg, #d2d6ef, #e1e5f0, #8cb7ca);
   padding: 5rem;
   display: flex;
   flex-wrap: wrap;
@@ -11,9 +10,8 @@
 .media-card {
   width: 250px;
   height: 280px;
-  border-radius: 35px; /* 35px 0 0; */
+  border-radius: 35px;
   overflow: hidden;
-/*   box-shadow: 0 4px 6px rgba(0,0,0,0.2); */
   transition: transform 0.3s;
   position: relative;
 }
@@ -94,7 +92,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 35px;/* 8px; */
+  border-radius: 35px;
   border: 1.5px solid rgba(255, 255, 255, 0.25);
   pointer-events: none;
   z-index: 0;
@@ -105,4 +103,18 @@
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border-radius: 35px;
+}
+
+@keyframes confetti {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) rotate(var(--r)) scale(var(--s));
+    opacity: 0;
+  }
 }

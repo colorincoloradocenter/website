@@ -99,6 +99,16 @@ export function initPhotos() {
     document.querySelectorAll('.media-blur-btn').forEach((btn, idx) => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
+
+            if (idx === 0) {
+                launchConfetti(btn, 'unicorn');
+                return; 
+            }
+            if (idx === 2) {
+                launchConfetti(btn, 'puzzle');
+                return; 
+            }
+
             modalBody.innerHTML = modalContents[idx] || "<p>Sin información.</p>";
             modal.classList.remove('hidden');
 
@@ -129,4 +139,57 @@ export function initPhotos() {
             }
         });
     }, 100);
+    function launchConfetti(target, type) {
+    const emojis = type === 'unicorn'
+        ? ["✨","🌟","💫","⭐","🦄","🌈"]
+        : ["🧩","♾️","🎧","💙","🩵","💛"];
+
+    const count = 6;
+    const rect = target.getBoundingClientRect();
+    const container = document.createElement('div');
+    container.style.position = 'fixed';
+    container.style.left = (rect.left + rect.width / 2) + 'px';
+    container.style.top = (rect.top + rect.height / 2) + 'px';
+    container.style.pointerEvents = 'none';
+    container.style.zIndex = 9999;
+    document.body.appendChild(container);
+
+    for (let i = 0; i < count; i++) {
+        const span = document.createElement('span');
+        span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        span.style.position = 'absolute';
+        span.style.fontSize = `${0.8 + Math.random() * 1.2}rem`;
+        span.style.opacity = 1;
+
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = 80 + Math.random() * 300;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance + 200;
+        const rotation = 180 + Math.random() * 360;
+        const scale = 0.6 + Math.random() * 0.8;
+        const duration = 1.8 + Math.random() * 0.5;
+
+        span.style.setProperty("--x", `${x}px`);
+        span.style.setProperty("--y", `${y}px`);
+        span.style.setProperty("--r", `${rotation}deg`);
+        span.style.setProperty("--s", scale);
+
+        span.style.animation = `confetti ${duration}s ease-out forwards`;
+
+        span.addEventListener("animationend", () => {
+        span.remove();
+        if (i === count - 1) container.remove();
+        });
+
+        container.appendChild(span);
+    }
+    }
+
+    const blurBtns = document.querySelectorAll('.media-blur-btn');
+    blurBtns.forEach((btn, idx) => {
+        btn.addEventListener('click', (e) => {
+            if (idx === 0) launchConfetti(btn, 'unicorn');
+            if (idx === 2) launchConfetti(btn, 'puzzle');
+        });
+    });
 }

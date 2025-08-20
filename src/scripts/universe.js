@@ -1,6 +1,8 @@
 export function initUniverse() {
     window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
+const maxScroll = 2000;
+const t = Math.min(scrollY / maxScroll, 1);
 
     let speedFactor;
     if (window.innerWidth >= 1200) {
@@ -12,10 +14,12 @@ export function initUniverse() {
     }
 
     const angle = 24 + scrollY * speedFactor;
-    document.body.style.background = `linear-gradient(${angle}deg, #010a13, #22212f, #473545, #0a2036, #030f1c)`;
+    const color1 = `rgba(${5 + 20 * t},${8 + 30 * t},${15 + 60 * t},1)`;
+    const color2 = `rgba(${18 + 80 * t},${16 + 60 * t},${25 + 80 * t},1)`;
+    const color3 = `rgba(${30 + 40 * t},${22 + 40 * t},${35 + 80 * t},1)`;
+    document.body.style.background = `linear-gradient(24deg, ${color1}, ${color2}, ${color3})`;
     });
 
-    // configuraciones
     let starDensity = 0.15;
     let speedCoeff = 0.03;
     let width, height, starCount;
@@ -27,9 +31,8 @@ export function initUniverse() {
     const stars = [];
     let fps = 60;
 
-    if (!canva) return; // seguridad
+    if (!canva) return;
 
-    // optimización equipos débiles
     if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) {
         starDensity = 0.1;
         speedCoeff = 0.02;
@@ -38,11 +41,9 @@ export function initUniverse() {
 
     let universe = canva.getContext('2d');
 
-    // ajustar tamaño inicial
     windowResizeHandler();
     window.addEventListener('resize', windowResizeHandler, false);
 
-    // inicializar estrellas
     for (let i = 0; i < starCount; i++) {
         stars[i] = new Star();
         stars[i].reset();
@@ -50,7 +51,6 @@ export function initUniverse() {
 
     draw();
 
-    // ----- funciones -----
     function draw() {
         universe.clearRect(0, 0, width, height);
 
@@ -61,7 +61,6 @@ export function initUniverse() {
             star.draw();
         }
 
-        // lo ideal: solo requestAnimationFrame
         requestAnimationFrame(draw);
     }
 
