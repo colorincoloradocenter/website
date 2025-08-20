@@ -7,9 +7,9 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script async src="//www.instagram.com/embed.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/css2" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
 
     <link rel="stylesheet" href="src/styles/style.css" />
 
@@ -59,26 +59,29 @@
     <section id="photos-welcome"></section>
 
 
-    <section id="inicio" class="flex justify-center items-center py-8 bg-black/30 backdrop-blur-sm w-full">
-        <div class="text-center px-8 py-24 w-full">
-            <h2 class="text-white font-bold mb-2" style="font-size: 24px;">Bienvenido a Colorin Colorado</h2>
-            <p class="text-white" >Somos un centro de terapias especializadas para niños, adolescentes y adultos neudiversos y neurotípicos.</p>
-            <p class="text-white" style="font-family: 'Sniglet', system-ui; font-weight: 400; font-style: normal; font-size: 16px;">Te acompañaremos en cada paso de esta nueva aventura.</p>
+    <section id="inicio" class="flex justify-center items-center py-8 bg-black/60 backdrop-blur-sm w-full">
+        <div class="bienvenida-contenedor max-w-lg w-full mx-auto px-4 pt-8">
+            <h2 class="welcome-title">Bienvenido a Colorin Colorado</h2>
+            <p class="description">Somos un centro de terapias especializadas</p>
+            <p class="description">para niños, adolescentes y adultos neudiversos y neurotípicos.</p>
+            <p class="description">🌈 Te acompañaremos en cada paso de esta nueva aventura.🦄</p>
         </div>
     </section>
 
     <section id="Instagram">   
         <div class="flex justify-center w-full relative py-12 gap-4">
-            <blockquote class="instagram-media" 
-                data-instgrm-captioned 
-                data-instgrm-permalink="https://www.instagram.com/reel/DH9yy-vvry8/?utm_source=ig_embed&amp;utm_campaign=loading" 
-                data-instgrm-version="14"
-                style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px rgba(0,0,0,0.5),0 1px 5px rgba(0,0,0,0.15); margin:1px; max-width:280px; min-width:200px; padding:0; width:100%;">
-                <a href="https://www.instagram.com/reel/DH9yy-vvry8/?utm_source=ig_embed&amp;utm_campaign=loading" 
-                style="background:#FFF; line-height:0; text-align:center; text-decoration:none; width:100%;" target="_blank">
-                    <div style="padding-top:100%;"></div>
-                </a>
-            </blockquote>
+            <div class="instagram-card">
+                <blockquote class="instagram-media" 
+                    data-instgrm-captioned 
+                    data-instgrm-permalink="https://www.instagram.com/reel/DH9yy-vvry8/?utm_source=ig_embed&amp;utm_campaign=loading" 
+                    data-instgrm-version="14"
+                    style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px rgba(0,0,0,0.5),0 1px 5px rgba(0,0,0,0.15); margin:1px; max-width:280px; min-width:200px; padding:0; width:100%;">
+                    <a href="https://www.instagram.com/reel/DH9yy-vvry8/?utm_source=ig_embed&amp;utm_campaign=loading" 
+                    style="background:#FFF; line-height:0; text-align:center; text-decoration:none; width:100%;" target="_blank">
+                        <div style="padding-top:100%;"></div>
+                    </a>
+                </blockquote>
+            </div>
         </div>
     </section>
 
@@ -129,6 +132,13 @@
     </footer>
 
     <script type="module" src="src/scripts/main.js"></script>
+
+    <div id="media-modal" class="media-modal hidden">
+        <div class="media-modal-content">
+            <button class="media-modal-close" aria-label="Cerrar">&times;</button>
+            <div id="media-modal-body"></div>
+        </div>
+    </div>
 
 </body>
 </html>

@@ -6,7 +6,6 @@ export function initNavbar() {
         const windowHeight = window.innerHeight;
         const scrollY = window.scrollY;
 
-        // barras
         const barInicio = document.getElementById('bar-inicio');
         const barPlanes = document.getElementById('bar-planes');
         const barContacto = document.getElementById('bar-contacto');
@@ -22,7 +21,7 @@ export function initNavbar() {
 
         if (scrollY < headerHeight + 50) {
             barInicio.style.opacity = '1';
-        } else if (footerRect.top < windowHeight * 0.6) {
+        } else if (footerRect.top < windowHeight * 0.9) {
             barContacto.style.opacity = '1';
         } else if (
             planesRect.top < windowHeight * 0.5 &&
@@ -34,7 +33,6 @@ export function initNavbar() {
         }
     }
 
-    // eventos de click
     const navInicio = document.getElementById('nav-inicio');
     if (navInicio) {
         navInicio.addEventListener('click', e => {
@@ -62,10 +60,8 @@ export function initNavbar() {
         });
     }
 
-    // scroll listener
     window.addEventListener('scroll', updateNavBarBySection);
 
-    // header spacer
     function updateHeaderSpacer() {
         const header = document.querySelector('header');
         const spacer = document.querySelector('.header-spacer');
@@ -76,6 +72,5 @@ export function initNavbar() {
     updateHeaderSpacer();
     window.addEventListener('resize', updateHeaderSpacer);
 
-    // llamada inicial
     updateNavBarBySection();
 }

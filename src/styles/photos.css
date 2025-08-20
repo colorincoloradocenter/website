@@ -11,10 +11,11 @@
 .media-card {
   width: 250px;
   height: 280px;
-  border-radius: 35px;
+  border-radius: 35px; /* 35px 0 0; */
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+/*   box-shadow: 0 4px 6px rgba(0,0,0,0.2); */
   transition: transform 0.3s;
+  position: relative;
 }
 
 .media-card:hover {
@@ -27,4 +28,81 @@
   height: 100%;
   object-fit: cover;
   object-position: bottom;
+}
+
+.media-blur-text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #fff;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.media-blur-text::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25); 
+  border-radius: inherit;              
+  backdrop-filter: blur(16px);        
+  -webkit-backdrop-filter: blur(16px); 
+  z-index: -1;
+}
+
+.media-blur-text::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgb(255, 255, 255);
+  z-index: 0;
+  opacity: 100%;
+}
+
+.media-blur-btn {
+  position: relative;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 400;
+  border-radius: 35px;
+  padding: 8px 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+  z-index: 1;
+  overflow: visible;
+  pointer-events: auto;
+}
+
+.media-blur-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 35px;/* 8px; */
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.media-blur-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 35px;
 }

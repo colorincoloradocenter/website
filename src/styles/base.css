@@ -10,3 +10,100 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.welcome-title {
+  font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  font-variation-settings:"wdth" 125;
+  color: white;
+  font-size: 24px;
+  padding-bottom: 1rem;
+}
+
+.description {
+  font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 225;
+  font-style: normal;
+  font-variation-settings: "wdth" 115;
+  color: white;
+  font-size: 18px;
+}
+
+.welcome-title,
+.description {
+  text-align: left;
+}
+
+.bienvenida-contenedor {
+  max-width: 540px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem 1rem 2rem 1rem;
+  box-sizing: border-box;
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .bienvenida-contenedor {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+.instagram-card {
+  background: white;
+  padding: 0;
+  max-width: 340px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+  height: 460px;
+}
+
+.media-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.media-modal.hidden {
+  display: none;
+}
+
+.media-modal-content {
+  background: #fff;
+  border-radius: 35px;
+  max-width: 95vw;
+  width: 370px;
+  padding: 2rem 1.5rem 2rem 1.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  position: relative;
+  animation: modalIn 0.2s;
+}
+
+@keyframes modalIn {
+  from { transform: translateY(40px) scale(0.95); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.media-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #222;
+  cursor: pointer;
+  z-index: 2;
+}
