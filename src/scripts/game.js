@@ -5,6 +5,8 @@ let difficulty = "easy";
 let score = 0;
 let timer = 0;
 let timerInterval;
+let lastTime = 0;
+
 
 const symbols = ["🧩", "🌈", "🦄", "♾️", "💙", "💛", "💫", "🎧"];
 let fallingObjects = [];
@@ -172,7 +174,7 @@ function spawnObject() {
 
     if (symbol === countSymbol) totalFalling++;
 }
-
+/* 
 function loop() {
     if (!gameRunning) return;
 
@@ -181,6 +183,32 @@ function loop() {
     if (Math.random() < difficultySettings[difficulty].spawnRate) spawnObject();
 
     fallingObjects.forEach(obj => obj.y += obj.speed);
+    fallingObjects.forEach(obj => {
+        ctx.font = `${obj.size}px Arial`;c
+        ctx.fillText(obj.symbol, obj.x, obj.y);
+    });
+
+    fallingObjects = fallingObjects.filter(obj => obj.y <= canvas.height);
+
+    updateHUD();
+    requestAnimationFrame(loop);
+} */
+
+function loop(timestamp) {
+    if (!gameRunning) return;
+
+    if (!lastTime) lastTime = timestamp;
+    const delta = (timestamp - lastTime) / 1000;
+    lastTime = timestamp;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (Math.random() < difficultySettings[difficulty].spawnRate * delta * 60) {
+        spawnObject();
+    }
+
+    fallingObjects.forEach(obj => obj.y += obj.speed * delta * 60);
+
     fallingObjects.forEach(obj => {
         ctx.font = `${obj.size}px Arial`;
         ctx.fillText(obj.symbol, obj.x, obj.y);
@@ -192,6 +220,7 @@ function loop() {
     requestAnimationFrame(loop);
 }
 
+
 function handleClick(e) {
     const rect = canvas.getBoundingClientRect();
     const clickX = (e.clientX ?? e.touches[0].clientX) - rect.left;
@@ -199,8 +228,10 @@ function handleClick(e) {
 
     for (let i = 0; i < fallingObjects.length; i++) {
         const obj = fallingObjects[i];
-        if (clickX >= obj.x && clickX <= obj.x + obj.width &&
-            clickY >= obj.y && clickY <= obj.y + obj.size) {
+        /* if (clickX >= obj.x && clickX <= obj.x + obj.width && clickY >= obj.y && clickY <= obj.y + obj.size) { */
+        const padding = 10; // margen extra para hacer más fácil el click
+        if (clickX >= obj.x - padding && clickX <= obj.x + obj.width + padding &&
+            clickY >= obj.y - obj.size - padding && clickY <= obj.y + padding) {
         if (targetSymbols.includes(obj.symbol)) {
             hits[obj.symbol]++;
             score++;

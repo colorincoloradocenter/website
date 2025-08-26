@@ -8,6 +8,7 @@ export function initHiddenTabs() {
     const navPlanes = document.getElementById("nav-planes");
     const navContacto = document.getElementById("nav-contacto");
     const unicornToy = document.getElementById("unicorn-toy");
+    const universeSection = document.getElementById("universe");
 
     if (btnJugar) {
         btnJugar.addEventListener("click", () => {
@@ -18,6 +19,7 @@ export function initHiddenTabs() {
             if (navPlanes) navPlanes.classList.add("hidden");
             if (navContacto) navContacto.classList.add("hidden");
             if (unicornToy) unicornToy.classList.add("hidden");
+            if (universeSection) universeSection.classList.add("hidden");
             window.dispatchEvent(new Event('resize'));
             juegoSection.scrollIntoView({ behavior: "smooth" });
         });
@@ -34,6 +36,7 @@ export function initHiddenTabs() {
             if (navPlanes) navPlanes.classList.remove("hidden");
             if (navContacto) navContacto.classList.remove("hidden");
             if (unicornToy) unicornToy.classList.remove("hidden");
+            if (universeSection) universeSection.classList.remove("hidden");
             window.dispatchEvent(new Event('resize'));
             juegoSection.scrollIntoView({ behavior: "smooth" });
             header.scrollIntoView({ behavior: "smooth" });
