@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Colorin Colorado</title>
-
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script async src="//www.instagram.com/embed.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com/css2" />
@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="src/styles/style.css" />
 
+
     <link rel="icon" type="image/png" href="src/assets/logo.png">
 
     <meta property="og:title" content="Colorin Colorado">
@@ -20,119 +21,48 @@
     <meta property="og:image" content="https://colorincolorado-pe.netlify.app/public/images/preview.png">
     <meta property="og:url" content="https://colorincolorado-pe.netlify.app">
     <meta property="og:type" content="website">
+
+
+    
 </head>
 
 <body class="min-h-screen flex flex-col">
+
     <canvas id="universe"></canvas>
 
-    <header class="fixed top-0 left-0 w-full z-50 header-theme">
+    <header class="header-theme">
+        <div id="unicorn-toy" class="unicorn-gif"></div>
 
-    <img id="unicorn-toy" src="public/stickers/unicorn_1.gif" class="unicorn-gif" alt="Unicornio" style="position:fixed; left:50px; top:50px; z-index:999; cursor:grab;">
-        <div id="unicorn-bubble" class="speech-bubble" style="display:none; position:fixed; z-index:1000;">
-        <span id="bubble-text"></span>
-    </div>  
-    
-    <div class="max-w-7xl mx-auto flex justify-between items-center py-4 px-6">
-        <h1 class="header-text text-xl font-bold">
-            <span class="block font-thin text-sm">Centro Psicológico</span>
-            <span class="font-heather">COLORIN COLORADO</span>
-        </h1>
-        <nav class="space-x-10 header-text flex">
-        <a href="#inicio" class="nav-link hover:underline relative" id="nav-inicio">
-            Inicio
-            <span id="bar-inicio" class="absolute left-1/2 -translate-x-1/2 -bottom-2 w-6 h-1 bg-blue-600 rounded transition-all duration-300 opacity-0"></span>
-        </a>
-        <a href="#planes" class="nav-link hover:underline relative" id="nav-planes">
-            Planes
-            <span id="bar-planes" class="absolute left-1/2 -translate-x-1/2 -bottom-2 w-6 h-1 bg-blue-600 rounded transition-all duration-300 opacity-0"></span>
-        </a>
-        <a href="#footer" class="nav-link hover:underline relative" id="nav-contacto">
-            Contacto
-            <span id="bar-contacto" class="absolute left-1/2 -translate-x-1/2 -bottom-2 w-6 h-1 bg-blue-600 rounded transition-all duration-300 opacity-0"></span>
-        </a>
-        </nav>
-    </div>
+        <div class="header-container">
+
+            <h1 class="header-text">
+                <span class="header-subtitle">Centro Psicológico</span>
+                <span class="font-heather">COLORIN COLORADO</span>
+            </h1>
+
+            <nav class="header-nav">
+
+                <a href="#inicio" class="nav-link" id="nav-inicio">
+                    Inicio
+                    <span id="bar-inicio" class="nav-bar"></span>
+                </a>
+                <a href="#planes" class="nav-link" id="nav-planes">
+                    Planes
+                    <span id="bar-planes" class="nav-bar"></span>
+                </a>
+                <a href="#footer" class="nav-link" id="nav-contacto">
+                    Contacto
+                    <span id="bar-contacto" class="nav-bar"></span>
+                </a>
+
+            </nav>
+        </div>
     </header>
 
-    <div class="header-spacer flex justify-center items-center py-8 bg-black relative z-10 w-full"></div>
 
-    <section id="photos-welcome"></section>
+    <div class="header-spacer"></div>
 
-
-    <section id="inicio" class="flex justify-center items-center py-8 bg-black/50 backdrop-blur-sm w-full">
-        <div class="bienvenida-contenedor max-w-lg w-full mx-auto px-4 pt-8">
-            <h2 class="welcome-title">Bienvenido a Colorin Colorado</h2>
-            <p class="description">Somos un centro de terapias especializadas</p>
-            <p class="description">para niños, adolescentes y adultos neudiversos y neurotípicos.</p>
-            <p class="description">🌈 Te acompañaremos en cada paso de esta nueva aventura.🦄</p>
-        </div>
-    </section>
-
-    <section id="Instagram">   
-        <div class="flex justify-center w-full relative py-12 gap-4">
-            <div class="instagram-card">
-                <blockquote class="instagram-media" 
-                    data-instgrm-captioned 
-                    data-instgrm-permalink="https://www.instagram.com/reel/DH9yy-vvry8/?utm_source=ig_embed&amp;utm_campaign=loading" 
-                    data-instgrm-version="14"
-                    style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px rgba(0,0,0,0.5),0 1px 5px rgba(0,0,0,0.15); margin:1px; max-width:280px; min-width:200px; padding:0; width:100%;">
-                    <a href="https://www.instagram.com/reel/DH9yy-vvry8/?utm_source=ig_embed&amp;utm_campaign=loading" 
-                    style="background:#FFF; line-height:0; text-align:center; text-decoration:none; width:100%;" target="_blank">
-                        <div style="padding-top:100%;"></div>
-                    </a>
-                </blockquote>
-            </div>
-        </div>
-    </section>
-
-
-    <section id="planes" class="p-5 mt-auto mb-16">
-        <h2 class="text-3xl font-bold mb-16 text-center text-white">Nuestros Planes Mensuales</h2>
-        <div id="plans-container" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center max-w-7xl mx-auto"></div>
-    </section>
-
-        <footer id="footer" class="bg-black text-gray-300 w-full mt-auto pt-8">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 p-8">
-
-        <div>
-            <h3 class="text-white font-bold mb-4">Términos</h3>
-            <ul class="space-y-2">
-            <li><a href="https://tally.so/r/mONVW8" target="_blank" class="hover:underline">Términos y condiciones de atención</a></li>
-            </ul>
-        </div>
-
-        <div>
-            <h3 class="text-white font-bold mb-4">Redes Sociales</h3>
-                <ul class="space-y-0">
-                    <li><a href="https://www.instagram.com/colorincoloradocenter/" target="_blank" rel="noopener noreferrer" class="hover:underline">Instagram</a></li>
-                    <li><a href="https://www.facebook.com/centropsicologicocolorincolorado/" target="_blank" rel="noopener noreferrer" class="hover:underline">Facebook</a></li>
-                    <li><a href="https://www.tiktok.com/@colorincoloradocenter" target="_blank" rel="noopener noreferrer" class="hover:underline">TikTok</a></li>
-                </ul>
-        </div>
-
-        <div>
-            <h3 class="text-white font-bold mb-4">Contacto</h3>
-            <p>Email: 
-                <a href="mailto:colorincoloradocenter@gmail.com" class="hover:underline">
-                    colorincoloradocenter@gmail.com
-                </a>
-            </p>
-            <p>Telf: 
-                <a href="https://wa.me/51967260163?text=Hola,%20estoy%20interesad@%20en%20sus%20servicios." target="_blank" rel="noopener noreferrer" class="hover:underline">+51 967 260 163</a>
-            </p>
-            <a href="https://maps.app.goo.gl/i9WxMSEYBMgBzRbB6" target="_blank" rel="noopener noreferrer" class="hover:underline">Ubicación</a>
-        </div>
-        </div>
-
-        <div class="w-full h-28"></div>
-
-        <div class="bg-gray-1000 text-center py-4 text-sm text-gray-500">
-            © 2025 Centro Psicológico Colorin Colorado - Todos los derechos reservados
-        </div>
-    </footer>
-
-    <script type="module" src="src/scripts/main.js"></script>
-
+    <section id="photos-welcome" class="page-section"></section>
     <div id="media-modal" class="media-modal hidden">
         <div class="media-modal-content">
             <button class="media-modal-close" aria-label="Cerrar">&times;</button>
@@ -140,5 +70,128 @@
         </div>
     </div>
 
+    <section id="inicio" class="inicio-section">
+        <div class="bienvenida-contenedor">
+
+            <h2 class="welcome-title">Bienvenido a Colorin Colorado</h2>
+            <p class="description">Somos un centro de terapias especializadas</p>
+            <p class="description">para niños, adolescentes y adultos neurodiversos y neurotípicos.</p>
+            <p class="description extra">🌈 Te acompañaremos en cada paso de esta nueva aventura.🦄</p>
+
+            <div class="btn-container">
+                <button id="btn-jugar">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
+                    <path d="M200-80v-160q0-23 12-41.5t32-29.5l196-99v-70l-139 69q-12 6-25 9t-26 3q-31 0-58.5-16T149-461q-14-27-12-57.5t19-56.5l124-185-80-120h240q133 0 226.5 93T760-560v480H200Zm80-80h400v-400q0-100-70-170t-170-70h-90l26 40-153 230q-5 8-5.5 16.5T221-497q5 11 13.5 14.5T251-479q3 0 15-3l254-128v250L280-240v80Zm160-320Z"/>
+                    </svg>
+                    <span>Jugar</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="juego" class="hidden">
+        <h2 class="titulo-juego">Hora de divertirnos</h2>
+        <div class="juego-container">
+            <div id="hud">
+                <div class="hud-item">
+                    <span class="hud-title">Puntos</span>
+                    <span id="score-display" class="hud-value">0</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-title">Dificultad</span>
+                    <span id="difficulty-display" class="hud-value">Fácil</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-title">Tiempo</span>
+                    <span id="timer-display" class="hud-value">30</span>
+                </div>
+            </div>
+            <canvas id="game-canvas"></canvas>
+            <button id="btn-volver">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+                    <path d="m456-320 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 160q-19 0-36-8.5T296-192L80-480l216-288q11-15 28-23.5t36-8.5h440q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H360Z M180-480l180 240h440v-480H360L180-480Zm400 0Z"/>
+                </svg>
+                <span>Volver</span>
+            </button>
+        </div>
+    </section>
+    <div id="symbol-select-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-[400px] text-center">
+            <button id="close-symbol-modal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800">✕</button>
+            <h3 class="text-xl font-bold mb-4">¿Con qué símbolos deseas jugar?</h3>
+            <div id="symbol-options" class="flex flex-wrap justify-center gap-3 mb-4"></div>
+            <button id="confirm-symbols" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50" disabled>Confirmar</button>
+        </div>
+    </div>
+
+    <div id="difficulty-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-[400px] text-center">
+            <h3 class="text-xl font-bold mb-4">Selecciona la dificultad</h3>
+            <input type="range" id="difficulty-slider" min="1" max="3" value="1" class="w-full mb-2">
+            <span id="difficulty-label" class="block mb-2 font-semibold">Fácil</span>
+            <p id="difficulty-description" class="text-sm text-gray-600 mb-4">Eliges 1 símbolo. Ese mismo debes atraparlo y contarlo. Velocidad baja. Tiempo: 60s.</p>
+            <button id="close-modal" class="px-4 py-2 bg-blue-600 text-white rounded">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="endgame-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-[400px] text-center">
+            <p id="endgame-question" class="text-lg mb-4"></p>
+            <input type="number" id="endgame-answer" class="border rounded p-2 mb-4 w-full" />
+            <button id="endgame-confirm" class="px-4 py-2 bg-green-600 text-white rounded">Confirmar</button>
+        </div>
+    </div>
+
+    <section id="instagram">
+        <div class="instagram-wrapper">
+            <div class="instagram-card">
+                <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DH9yy-vvry8/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14">
+                    <a href="https://www.instagram.com/reel/DH9yy-vvry8/?utm_source=ig_embed&amp;utm_campaign=loading" target="_blank" rel="noopener noreferrer">
+                    <div class="instagram-placeholder"></div></a>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <section id="planes" class="planes-section">
+        <h2 class="planes-title">Nuestros Planes Mensuales</h2>
+        <div id="plans-container" class="plans-grid"></div>
+    </section>
+
+
+    <footer id="footer">
+        <div class="footer-content">
+            <div>
+                <h3>Términos</h3>
+                <ul>
+                    <li><a href="https://tally.so/r/mONVW8" target="_blank">Términos y condiciones de atención</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Redes Sociales</h3>
+                <ul>
+                    <li><a href="https://www.instagram.com/colorincoloradocenter/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    <li><a href="https://www.facebook.com/centropsicologicocolorincolorado/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                    <li><a href="https://www.tiktok.com/@colorincoloradocenter" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Contacto</h3>
+                <p>Email: <a href="mailto:colorincoloradocenter@gmail.com">colorincoloradocenter@gmail.com</a></p>
+                <p>Telf: <a href="https://wa.me/51967260163?text=Hola,%20estoy%20interesad@%20en%20sus%20servicios." target="_blank" rel="noopener noreferrer">+51 967 260 163</a></p>
+                <a href="https://maps.app.goo.gl/i9WxMSEYBMgBzRbB6" target="_blank" rel="noopener noreferrer">Ubicación</a>
+            </div>
+        </div>
+
+        <div class="footer-spacer"></div>
+
+        <div class="footer-bottom">
+            © 2025 Centro Psicológico Colorin Colorado - Todos los derechos reservados
+        </div>
+    </footer>
+    <script type="module" src="src/scripts/main.js"></script>
 </body>
 </html>

@@ -3,6 +3,8 @@ import { initPhotos } from "./photos.js";
 import { initNavbar } from "./navbar.js";
 import { initUnicorn } from "./unicorn.js";
 import { initPlancards } from "./plancards.js";
+import { initHiddenTabs } from "./hiddenTabs.js";
+import { initGame }  from  "./game.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     initNavbar();
@@ -10,4 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initPhotos();
     initUnicorn();
     initPlancards();
+    initHiddenTabs();
+    initGame();
 });

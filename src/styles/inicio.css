@@ -1,0 +1,83 @@
+.inicio-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;            
+  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);  
+  width: 100%;
+}
+
+.bienvenida-contenedor {
+  max-width: 540px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1rem 0 1rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+  .bienvenida-contenedor {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+.welcome-title {
+  font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  font-variation-settings:"wdth" 125;
+  color: white;
+  font-size: 24px;
+  padding-bottom: 1rem;
+  text-align: left;
+}
+
+.description {
+  font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 225;
+  font-style: normal;
+  font-variation-settings: "wdth" 115;
+  color: white;
+  font-size: 18px;
+  text-align: left;
+}
+
+.description.extra {
+  padding-top: 20px;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+#btn-jugar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; 
+  padding: 0.75rem 1.5rem; 
+  background-color: #2563eb;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  border: none;
+  border-radius: 35px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+#btn-jugar:hover {
+  background-color: #1d4ed8; 
+  transform: translateY(-2px);
+}
+
+#btn-jugar svg {
+  fill: currentColor;
+}

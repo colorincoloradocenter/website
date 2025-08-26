@@ -1,40 +1,19 @@
-@media (max-width: 600px) {
-  #unicorn-toy {
-    width: 40px;
-    height: 40px;
-  }
-}
 #unicorn-toy {
-    position: fixed;
-    top: 50px;
-    left: 50px;
-    width: 80px;
-    height: 80px;
-    cursor: grab;
-    z-index: 999;
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  width: 80px;
+  height: 80px;
+  cursor: grab;
+  z-index: 999;
+  background-image: url(../../public/stickers/unicorn_1.gif);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-/* .speech-bubble {
-  background: #fff;
-  color: #333;
-  padding: 16px 16px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 100;
-  font-style: normal;
-  position: fixed;
-  min-width: 80px;
-  max-width: 220px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1.2;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  border: none;
-  white-space: normal;
-  word-break: break-word;
-  overflow-wrap: break-word;
-}  */
+@media (max-width: 600px) {
+  #unicorn-toy {
+    width: 65px;
+    height: 65px;
+  }
+}

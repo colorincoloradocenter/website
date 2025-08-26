@@ -1,13 +1,12 @@
 export function initUnicorn(){
     (function () {
-        //CONFIG
+
         const SPEED_LIMIT = 18;
         const friction = 0.98;
         const bounce = 0.85;
         const springStrength = 0.1; 
         const maxStretch = 120;  
 
-        //SETUP
         const unicorn = document.getElementById("unicorn-toy");
 
         let posX = 200, posY = 200;
@@ -18,7 +17,6 @@ export function initUnicorn(){
         let lastMouseX, lastMouseY;
         let lastMoveTime;
 
-        //FÍSICA
         function updatePosition() {
             if (!dragging) {
                 posX += velX;
@@ -27,7 +25,6 @@ export function initUnicorn(){
                 const maxX = window.innerWidth - unicorn.offsetWidth;
                 const maxY = window.innerHeight - unicorn.offsetHeight;
 
-                // efecto liga en eje X
                 if (posX < -maxStretch) posX = -maxStretch;
                 if (posX > maxX + maxStretch) posX = maxX + maxStretch;
 
@@ -37,7 +34,6 @@ export function initUnicorn(){
                     velX += (maxX - posX) * springStrength;
                 }
 
-                // efecto liga en eje Y
                 if (posY < -maxStretch) posY = -maxStretch;
                 if (posY > maxY + maxStretch) posY = maxY + maxStretch;
 
@@ -47,11 +43,9 @@ export function initUnicorn(){
                     velY += (maxY - posY) * springStrength;
                 }
 
-                // fricción + rebotes más suaves
                 velX *= friction;
                 velY *= friction;
 
-                // limitar velocidad
                 velX = Math.max(Math.min(velX, SPEED_LIMIT), -SPEED_LIMIT);
                 velY = Math.max(Math.min(velY, SPEED_LIMIT), -SPEED_LIMIT);
             }
@@ -62,15 +56,14 @@ export function initUnicorn(){
             requestAnimationFrame(updatePosition);
         }
 
-        //INTERACCIONES
         unicorn.addEventListener("mousedown", startDrag);
         unicorn.addEventListener("touchstart", startDrag, { passive: false });
 
         function startDrag(e) {
             e.preventDefault();
             dragging = true;
-            window.isUnicornHeld = true;      // 👈 señal para universe.js
-            window.isUnicornShaking = true;   // temblor visual
+            window.isUnicornHeld = true;
+            window.isUnicornShaking = true;
             unicorn.style.cursor = "grabbing";
 
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -106,14 +99,13 @@ export function initUnicorn(){
             lastMouseY = clientY;
             lastMoveTime = now;
 
-            // guardar la velocidad para universe.js (solo se usará al soltar)
             window.unicornDragDX = velX;
             window.unicornDragDY = velY;
         }
 
         function endDrag() {
             dragging = false;
-            window.isUnicornHeld = false;     // 👈 liberamos, ahora universe.js usa inercia
+            window.isUnicornHeld = false;
             window.isUnicornShaking = false;
             unicorn.style.cursor = "grab";
             document.removeEventListener("mousemove", onDrag);
@@ -122,7 +114,10 @@ export function initUnicorn(){
             document.removeEventListener("touchend", endDrag);
         }
 
-        //START LOOP
         requestAnimationFrame(updatePosition);
     })();
+    document.addEventListener("DOMContentLoaded", () => {
+    initUnicorn();
+    });
+
 }

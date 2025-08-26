@@ -1,6 +1,74 @@
+.planes-section {
+  padding: 2rem 1.25rem;
+  margin-bottom: 4rem;
+  margin-top: auto;
+}
+
+.planes-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 4rem;
+  text-align: center;
+  color: white;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .plans-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.plan-card {
+  background-color: rgba(13, 14, 14, 0.9);
+  color: white;
+  border-radius: 35px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: scale(1);
+  transition: transform 0.3s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.plan-card:hover {
+  transform: scale(1.05);
+}
+
+.plan-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.plan-type {
+  padding-top: 18px;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #c4c4c4;
+}
+
+.plan-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: -0.25rem;
+  margin-bottom: 0.5rem;
+}
+
 .price {
   font-family: 'Fredoka', sans-serif;
   font-weight: 600;
+  font-size: 3.75rem;
 }
 
 .price sup {
@@ -10,14 +78,43 @@
   vertical-align: super;
 }
 
-.plan-title {
-  margin-top: 2rem;
+.plan-sessions {
+  color: #b2b1c4;
+  margin-bottom: 1rem;
 }
 
-.plan-card {
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
+.plan-frequency {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #e5e7eb;
+  font-size: 0.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: 16px;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.plan-btn {
+  margin-top: 1.5rem;
+  width: 100%;
+  background-color: #0142c0;
+  color: white;
+  font-weight: 400;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  text-align: center;
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.plan-btn:hover {
+  background-color: #062869;
+}
+
+.plan-btn svg {
+  fill: #e3e3e3;
 }
 
 .ripple {

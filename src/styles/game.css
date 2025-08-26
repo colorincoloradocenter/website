@@ -1,0 +1,109 @@
+.titulo-juego {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#juego {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 40px 0;
+    background: transparent;
+}
+.juego-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#game-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+    background: linear-gradient(24deg, #d2d6ef, #e1e5f0, #8cb7ca);
+}
+
+#hud {
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 10px 24px;
+    
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    
+    z-index: 4;
+}
+
+.hud-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.hud-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #e0e0e0;
+}
+
+.hud-value {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+#btn-volver {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+    padding: 0.75rem 1rem;
+    background-color: #dc2626;
+    color: white;
+    transition: background-color 0.2s ease;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+}
+
+#btn-volver:hover {
+    background-color: #b91c1c;
+}
+
+#btn-volver span {
+  display: inline;
+}
+
+@media (max-width: 640px) {
+  #btn-volver span {
+    display: none;
+  }
+  #btn-volver {
+    padding: 0.75rem;
+    border-radius: 50%;
+    gap: 0;
+  }
+}
+

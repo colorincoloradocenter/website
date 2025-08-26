@@ -1,0 +1,79 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+}
+
+.header-theme {
+  background-color: black;
+  color: white;
+}
+
+.header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;         
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+
+.header-text {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.header-subtitle {
+  display: block;
+  font-weight: 300;
+  font-size: 0.875rem;
+}
+
+.font-heather {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.header-nav {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.nav-bar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -0.5rem;
+  width: 1.5rem;
+  height: 0.25rem;
+  background-color: #2563eb;
+  border-radius: 4px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.header-spacer {
+  display: flex;       
+  justify-content: center;    
+  align-items: center;       
+  padding: 2rem 0;            
+  background-color: black;     
+  position: relative;       
+  z-index: 10; 
+  width: 100%;            
+}
+

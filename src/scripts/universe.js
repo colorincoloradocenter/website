@@ -50,7 +50,7 @@ export function initUniverse() {
         window.unicornOffsetX = window.unicornOffsetX || 0;
         window.unicornOffsetY = window.unicornOffsetY || 0;
         window.isUniverseReturning = window.isUniverseReturning || false;
-        window.isUnicornHeld = window.isUnicornHeld || false; // 👈 nueva bandera global
+        window.isUnicornHeld = window.isUnicornHeld || false;
 
         if (!window.isUnicornHeld) {
             if (window.unicornDragDX || window.unicornDragDY) {
@@ -120,16 +120,16 @@ export function initUniverse() {
 
     function Star() {
         this.reset = () => {
-            this.giant = getProbability(3);
-            this.comet = this.giant || first ? false : getProbability(10);
+            this.giant = getProbability(0.9);
+            this.comet = this.giant || first ? false : getProbability(3);
             this.x = getRandInterval(world.left, world.right);
             this.y = getRandInterval(world.top, world.bottom);
-            this.r = getRandInterval(1, 2.6);
+            this.r = getRandInterval(0.5, 2.3);
             this.dx = getRandInterval(speedCoeff, 6 * speedCoeff)
-                + (this.comet ? speedCoeff * getRandInterval(50, 120) : 0)
+                + (this.comet ? speedCoeff * getRandInterval(30, 65) : 0)
                 + speedCoeff * 2;
             this.dy = -getRandInterval(speedCoeff, 6 * speedCoeff)
-                - (this.comet ? speedCoeff * getRandInterval(50, 120) : 0);
+                - (this.comet ? speedCoeff * getRandInterval(30, 65) : 0);
             this.fadingOut = null;
             this.fadingIn = true;
             this.opacity = 0;
