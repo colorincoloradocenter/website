@@ -9,7 +9,6 @@
   flex-direction: column;
 }
 
-/* Video parado */
 .campaign-card video {
   width: 100%;
   aspect-ratio: 9 / 16;
