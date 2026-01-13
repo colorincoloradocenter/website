@@ -5,6 +5,7 @@ import { initUnicorn } from "./unicorn.js";
 import { initPlancards } from "./plancards.js";
 import { initHiddenTabs } from "./hiddenTabs.js";
 import { initCampaign } from "./campaign.js";
+import { initNews } from "./news.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     initNavbar();
@@ -14,4 +15,5 @@ document.addEventListener("DOMContentLoaded", () => {
     initPlancards();
     initHiddenTabs();
     initCampaign();
+    initNews();
 });

@@ -1,123 +1,168 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Colorin Colorado</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script async src="//www.instagram.com/embed.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com/css2" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Colorin Colorado</title>
+        
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script async src="//www.instagram.com/embed.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com/css2" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <link rel="stylesheet" href="src/styles/style.css" />
-
-
-    <link rel="icon" type="image/png" href="src/assets/logo.png">
-
-    <meta property="og:title" content="Colorin Colorado">
-    <meta property="og:description" content="Te acompañaremos en cada paso de esta nueva aventura.">
-    <meta property="og:image" content="https://colorincolorado-pe.netlify.app/public/images/preview.png">
-    <meta property="og:url" content="https://colorincolorado-pe.netlify.app">
-    <meta property="og:type" content="website">
-    
-</head>
-
-<body class="min-h-screen flex flex-col">
-
-    <canvas id="universe"></canvas>
-
-    <header class="header-theme">
-        <div id="unicorn-toy" class="unicorn-gif"></div>
-
-        <div class="header-container">
-
-            <h1 class="header-text">
-                <span class="header-subtitle">Centro Psicológico</span>
-                <span class="font-heather">COLORIN COLORADO</span>
-            </h1>
-
-            <nav class="header-nav">
-
-                <a href="#inicio" class="nav-link" id="nav-inicio">
-                    Inicio
-                    <span id="bar-inicio" class="nav-bar"></span>
-                </a>
-                <a href="#planes" class="nav-link" id="nav-planes">
-                    Planes
-                    <span id="bar-planes" class="nav-bar"></span>
-                </a>
-                <a href="#footer" class="nav-link" id="nav-contacto">
-                    Contacto
-                    <span id="bar-contacto" class="nav-bar"></span>
-                </a>
-
-            </nav>
-        </div>
-    </header>
-
-    <div class="header-spacer"></div>
-
-    <section id="photos-welcome" class="page-section"></section>
-    <div id="media-modal" class="media-modal hidden">
-        <div class="media-modal-content">
-            <button class="media-modal-close" aria-label="Cerrar">&times;</button>
-            <div id="media-modal-body"></div>
-        </div>
-    </div>
-
-    <section id="inicio" class="inicio-section">
-        <div class="bienvenida-contenedor">
-
-            <h2 class="welcome-title">Bienvenido a Colorin Colorado</h2>
-            <p class="description">Somos un centro de terapias especializadas</p>
-            <p class="description">para niños, adolescentes y adultos neurodiversos y neurotípicos.</p>
-            <p class="description extra">🌈 Te acompañaremos en cada paso de esta nueva aventura.🦄</p>
-
-        </div>
-    </section>
-
-    <section id="campaign" class="page-section"></section>
+        <link rel="stylesheet" href="src/styles/style.css" />
 
 
-    <section id="planes" class="planes-section">
-        <h2 class="planes-title">Nuestros Planes Mensuales</h2>
-        <div id="plans-container" class="plans-grid"></div>
-    </section>
+        <link rel="icon" type="image/png" href="src/assets/logo.png">
 
-    <footer id="footer">
-        <div class="footer-content">
-            <div>
-                <h3>Términos</h3>
-                <ul>
-                    <li><a href="https://tally.so/r/mONVW8" target="_blank">Términos y condiciones de atención</a></li>
-                </ul>
+        <meta property="og:title" content="Colorin Colorado">
+        <meta property="og:description" content="Te acompañaremos en cada paso de esta nueva aventura.">
+        <meta property="og:image" content="https://colorincolorado-pe.netlify.app/public/images/preview.png">
+        <meta property="og:url" content="https://colorincolorado-pe.netlify.app">
+        <meta property="og:type" content="website">
+        
+    </head>
+
+    <body class="min-h-screen flex flex-col">
+
+        <canvas id="universe"></canvas>
+
+        <header class="header-theme">
+            <div id="unicorn-toy" class="unicorn-gif"></div>
+
+            <div class="header-container">
+
+                <h1 class="header-text">
+                    <span class="header-subtitle">Centro Psicológico</span>
+                    <span class="font-heather">COLORIN COLORADO</span>
+                </h1>
+
+                <nav class="header-nav">
+
+                    <a href="#inicio" class="nav-link" id="nav-inicio">
+                        Inicio
+                        <span id="bar-inicio" class="nav-bar"></span>
+                    </a>
+                    <a href="#planes" class="nav-link" id="nav-planes">
+                        Planes
+                        <span id="bar-planes" class="nav-bar"></span>
+                    </a>
+                    <a href="#footer" class="nav-link" id="nav-contacto">
+                        Contacto
+                        <span id="bar-contacto" class="nav-bar"></span>
+                    </a>
+
+                </nav>
             </div>
+        </header>
 
-            <div>
-                <h3>Redes Sociales</h3>
-                <ul>
-                    <li><a href="https://www.instagram.com/colorincoloradocenter/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                    <li><a href="https://www.facebook.com/centropsicologicocolorincolorado/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-                    <li><a href="https://www.tiktok.com/@colorincoloradocenter" target="_blank" rel="noopener noreferrer">TikTok</a></li>
-                </ul>
-            </div>
+        <div class="header-spacer"></div>
 
-            <div>
-                <h3>Contacto</h3>
-                <p>Email: <a href="mailto:colorincoloradocenter@gmail.com">colorincoloradocenter@gmail.com</a></p>
-                <p>Telf: <a href="https://wa.me/51967260163?text=Hola,%20estoy%20interesad@%20en%20sus%20servicios." target="_blank" rel="noopener noreferrer">+51 967 260 163</a></p>
-                <a href="https://maps.app.goo.gl/i9WxMSEYBMgBzRbB6" target="_blank" rel="noopener noreferrer">Ubicación</a>
+        <section id="photos-welcome" class="page-section"></section>
+        <div id="media-modal" class="media-modal hidden">
+            <div class="media-modal-content">
+                <button class="media-modal-close" aria-label="Cerrar">&times;</button>
+                <div id="media-modal-body"></div>
             </div>
         </div>
 
-        <div class="footer-spacer"></div>
+        <section id="inicio" class="inicio-section">
+            <div class="bienvenida-contenedor">
 
-        <div class="footer-bottom">
-            © 2025 Centro Psicológico Colorin Colorado - Todos los derechos reservados
-        </div>
-    </footer>
-    <script type="module" src="src/scripts/main.js"></script>
-</body>
+                <h2 class="welcome-title">Bienvenido a Colorin Colorado</h2>
+                <p class="description">Somos un centro de terapias especializadas</p>
+                <p class="description">para niños, adolescentes y adultos neurodiversos y neurotípicos.</p>
+                <p class="description extra">🌈 Te acompañaremos en cada paso de esta nueva aventura.🦄</p>
+
+            </div>
+        </section>
+
+        <section id="campaign" class="page-section"></section>
+
+        <section id="news" class="news-section">
+
+
+
+            <div class="news-slider">
+                <button class="news-nav prev" aria-label="Anterior">‹</button>
+
+                <div class="news-track">
+
+                    <article class="news-slide">
+
+                    <div class="news-image">
+
+                        <img
+                            class="news-img blur"
+                            src="public/media/news/banner-sm.png"
+                            alt=""
+                            aria-hidden="true"
+                        >
+                        <picture class="news-img main">
+                            <source media="(min-width: 1024px)" srcset="public/media/news/banner-lg.png">
+                            <source media="(min-width: 640px)"  srcset="public/media/news/banner-md.png">
+                            <img
+                                src="public/media/news/banner-sm.png"
+                                alt="Banner de noticia"
+                                draggable="false"
+                                oncontextmenu="return false"
+                            >
+                        </picture>
+
+                    </div>
+
+                    <div class="news-caption js-wsp-prekinder">
+                        <h3>Programa Pre-Kinder 2026</h3>
+                        <p>#SienteEscuchaAprende</p>
+                    </div>
+
+                    </article>
+
+                </div>
+
+                <button class="news-nav next" aria-label="Siguiente">›</button>
+            </div>
+
+        </section>
+
+        <section id="planes" class="planes-section">
+            <h2 class="planes-title">Nuestros Planes Mensuales</h2>
+            <div id="plans-container" class="plans-grid"></div>
+        </section>
+
+        <footer id="footer">
+            <div class="footer-content">
+                <div>
+                    <h3>Términos</h3>
+                    <ul>
+                        <li><a href="https://tally.so/r/mONVW8" target="_blank">Términos y condiciones de atención</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>Redes Sociales</h3>
+                    <ul>
+                        <li><a href="https://www.instagram.com/colorincoloradocenter/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                        <li><a href="https://www.facebook.com/centropsicologicocolorincolorado/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                        <li><a href="https://www.tiktok.com/@colorincoloradocenter" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>Contacto</h3>
+                    <p>Email: <a href="mailto:colorincoloradocenter@gmail.com">colorincoloradocenter@gmail.com</a></p>
+                    <p>Telf: <a href="https://wa.me/51967260163?text=Hola,%20estoy%20interesad@%20en%20sus%20servicios." target="_blank" rel="noopener noreferrer">+51 967 260 163</a></p>
+                    <a href="https://maps.app.goo.gl/i9WxMSEYBMgBzRbB6" target="_blank" rel="noopener noreferrer">Ubicación</a>
+                </div>
+            </div>
+
+            <div class="footer-spacer"></div>
+
+            <div class="footer-bottom">
+                © 2025 Centro Psicológico Colorin Colorado - Todos los derechos reservados
+            </div>
+        </footer>
+        <script type="module" src="src/scripts/main.js"></script>
+    </body>
 </html>

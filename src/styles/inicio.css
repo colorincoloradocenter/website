@@ -49,36 +49,24 @@
 .description.extra {
   padding-top: 20px;
   padding-bottom: 20px;
+  animation: blinkWeight 1.5s infinite;
 }
+
+@keyframes blinkWeight {
+  0% {
+    font-weight: 225;
+  }
+  50% {
+    font-weight: 600;
+  }
+  100% {
+    font-weight: 225;
+  }
+}
+
 
 .btn-container {
   display: flex;
   justify-content: center;
   margin-top: 1.5rem;
-}
-
-#btn-jugar {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem; 
-  padding: 0.75rem 1.5rem; 
-  background-color: #2563eb;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 400;
-  border: none;
-  border-radius: 35px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-}
-
-#btn-jugar:hover {
-  background-color: #1d4ed8; 
-  transform: translateY(-2px);
-}
-
-#btn-jugar svg {
-  fill: currentColor;
 }

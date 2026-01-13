@@ -21,7 +21,6 @@ footer {
   background: #000;
   color: #d1d5db;
   width: 100%;
-  margin-top: auto;
 }
 
 footer h3 {
@@ -67,3 +66,4 @@ footer a:hover {
   font-size: 0.875rem;
   color: #6b7280;
 }
+
