@@ -10,9 +10,16 @@ export function initUniverse() {
         else if (window.innerWidth >= 768) speedFactor = 0.07;
         else speedFactor = 0.045;
 
-        const color1 = `rgba(${5 + 20 * t},${8 + 30 * t},${15 + 60 * t},1)`;
-        const color2 = `rgba(${18 + 80 * t},${16 + 60 * t},${25 + 80 * t},1)`;
-        const color3 = `rgba(${30 + 40 * t},${22 + 40 * t},${35 + 80 * t},1)`;
+        const color1 = `rgba(${0  + 58 * t},${38 + 89 * t},${64 + 127 * t},1)`;
+        const color2 = `rgba(
+  ${10 + 50 * t},
+  ${28 + 70 * t},
+  ${50 + 90 * t},
+  1
+)`;
+
+        const color3 = `rgba(${0 + 40 * t},${38 + 40 * t},${64 + 80 * t},1)`;
+
         document.body.style.background = `linear-gradient(24deg, ${color1}, ${color2}, ${color3})`;
     });
 
@@ -21,9 +28,7 @@ export function initUniverse() {
 
     let width, height;
     let first = true;
-    const giantColor = '180,184,240';
-    const starColor = '226,225,142';
-    const cometColor = '226,225,224';
+
     const canva = document.getElementById('universe');
     const stars = [];
 
