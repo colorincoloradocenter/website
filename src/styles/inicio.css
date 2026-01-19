@@ -54,16 +54,8 @@
   animation: blinkWeight 1.5s infinite;
 }
 
-@keyframes blinkWeight {
-  0% {
-    font-weight: 225;
-  }
-  50% {
-    font-weight: 600;
-  }
-  100% {
-    font-weight: 225;
-  }
+.description.extra {
+  animation: emphasis 2s ease-in-out infinite;
 }
 
 :root {
