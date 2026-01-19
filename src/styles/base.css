@@ -1,7 +1,10 @@
 html, body {
-  height: auto;
-  background: #000;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
+
 
 body {
   font-family: 'TikTok Sans', sans-serif;

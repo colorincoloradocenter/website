@@ -7,7 +7,7 @@ import { initHiddenTabs } from "./hiddenTabs.js";
 import { initCampaign } from "./campaign.js";
 import { initNews } from "./news.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     initNavbar();
     initUniverse();
     initPhotos();

@@ -24,7 +24,7 @@
         
     </head>
 
-    <body class="min-h-screen flex flex-col">
+    <body class="min-h-screen">
 
         <canvas id="universe"></canvas>
 
@@ -69,20 +69,37 @@
 
         <section id="inicio" class="inicio-section">
             <div class="bienvenida-contenedor">
+                <h2 class="welcome-title">Bienvenidos a</h2>
+                <div class="title-wrapper">
+                    <div class="word-container colorin">
+                        <span class="letter" data-char="C">C</span>
+                        <span class="letter" data-char="O">O</span>
+                        <span class="letter" data-char="L">L</span>
+                        <span class="letter" data-char="O">O</span>
+                        <span class="letter" data-char="R">R</span>
+                        <span class="letter" data-char="I">I</span>
+                        <span class="letter" data-char="N">N</span>
+                    </div>
 
-                <h2 class="welcome-title">Bienvenido a Colorin Colorado</h2>
-                <p class="description">Somos un centro de terapias especializadas</p>
-                <p class="description">para niños, adolescentes y adultos neurodiversos y neurotípicos.</p>
+                    <div class="word-container colorado">
+                        <span class="letter char-1" data-char="C">C</span>
+                        <span class="letter char-2" data-char="O">O</span>
+                        <span class="letter char-3" data-char="L">L</span>
+                        <span class="letter char-4" data-char="O">O</span>
+                        <span class="letter char-5" data-char="R">R</span>
+                        <span class="letter char-6" data-char="A">A</span>
+                        <span class="letter char-7" data-char="D">D</span>
+                        <span class="letter char-8" data-char="O">O</span>
+                    </div>
+                </div>
+                <p class="description">Somos un centro de terapias especializadas para niños, adolescentes y adultos neurodiversos y neurotípicos.</p>  
                 <p class="description extra">🌈 Te acompañaremos en cada paso de esta nueva aventura.🦄</p>
-
             </div>
         </section>
 
         <section id="campaign" class="page-section"></section>
 
         <section id="news" class="news-section">
-
-
 
             <div class="news-slider">
                 <button class="news-nav prev" aria-label="Anterior">‹</button>
@@ -91,31 +108,31 @@
 
                     <article class="news-slide">
 
-                    <div class="news-image">
+                        <div class="news-image">
 
-                        <img
-                            class="news-img blur"
-                            src="public/media/news/banner-sm.png"
-                            alt=""
-                            aria-hidden="true"
-                        >
-                        <picture class="news-img main">
-                            <source media="(min-width: 1024px)" srcset="public/media/news/banner-lg.png">
-                            <source media="(min-width: 640px)"  srcset="public/media/news/banner-md.png">
                             <img
+                                class="news-img blur"
                                 src="public/media/news/banner-sm.png"
-                                alt="Banner de noticia"
-                                draggable="false"
-                                oncontextmenu="return false"
+                                alt=""
+                                aria-hidden="true"
                             >
-                        </picture>
+                            <picture class="news-img main">
+                                <source media="(min-width: 1024px)" srcset="public/media/news/banner-lg.png">
+                                <source media="(min-width: 640px)"  srcset="public/media/news/banner-md.png">
+                                <img
+                                    src="public/media/news/banner-sm.png"
+                                    alt="Banner de noticia"
+                                    draggable="false"
+                                    oncontextmenu="return false"
+                                >
+                            </picture>
 
-                    </div>
+                        </div>
 
-                    <div class="news-caption js-wsp-prekinder">
-                        <h3>Programa Pre-Kinder 2026</h3>
-                        <p>#SienteEscuchaAprende</p>
-                    </div>
+                        <div class="news-caption js-wsp-prekinder">
+                            <h3>Programa Pre-Kinder 2026</h3>
+                            <p>#SienteEscuchaAprende</p>
+                        </div>
 
                     </article>
 

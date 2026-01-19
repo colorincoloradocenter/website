@@ -46,7 +46,20 @@ export function initNavbar() {
     if (navPlanes) {
         navPlanes.addEventListener('click', e => {
             e.preventDefault();
-            document.getElementById('planes')?.scrollIntoView({ behavior: 'smooth' });
+
+            const header = document.querySelector('header');
+            const planes = document.getElementById('planes');
+
+            if (!planes) return;
+
+            const headerHeight = header?.offsetHeight || 80;
+            const y = planes.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+            window.scrollTo({
+                top: y,
+                behavior: 'smooth'
+            });
+
             setTimeout(updateNavBarBySection, 700);
         });
     }
