@@ -105,8 +105,10 @@
     left: 0;
     top: var(--step-height);
     z-index: -1;
+    -webkit-text-stroke: var(--stroke-width) black;
     
-    -webkit-text-stroke: var(--stroke-width) black; 
+    animation: popMiddle 2s ease-in-out infinite;
+    animation-delay: inherit;
 }
 
 .letter::before {
@@ -115,8 +117,10 @@
     left: 0;
     top: calc(var(--step-height) * 2);
     z-index: -2;
-    
     -webkit-text-stroke: var(--stroke-width) black;
+
+    animation: popBottom 2s ease-in-out infinite;
+    animation-delay: inherit;
 }
 
 .colorin .letter::after,
@@ -221,5 +225,35 @@
     .letter {
         letter-spacing: -1px;
         margin: 0;
+    }
+}
+
+@keyframes popMiddle {
+    0%, 20% {
+        top: var(--step-height);
+        opacity: 1;
+    }
+    35% {
+        top: 0px;
+        opacity: 0;
+    }
+    60%, 100% {
+        top: var(--step-height);
+        opacity: 1;
+    }
+}
+
+@keyframes popBottom {
+    0%, 20% {
+        top: calc(var(--step-height) * 2);
+        opacity: 1;
+    }
+    35% {
+        top: 0px;
+        opacity: 0;
+    }
+    60%, 100% {
+        top: calc(var(--step-height) * 2);
+        opacity: 1;
     }
 }

@@ -10,16 +10,16 @@ export function initNews() {
     const prekinderCaption = document.querySelector(".js-wsp-prekinder");
 
     if (prekinderCaption) {
-    prekinderCaption.style.cursor = "pointer";
-    prekinderCaption.addEventListener("click", () => {
-        window.open(wspLink, "_blank");
-    });
+        prekinderCaption.style.cursor = "pointer";
+        prekinderCaption.addEventListener("click", () => {
+            window.open(wspLink, "_blank");
+        });
     }
 
     const photos = [
-        "0c1fbcd6-7d9f-47ac-b3dd-1f91b6c8b51b.jpg",
         "4b1dd361-2d52-425d-b6cc-8b7336ead28a.jpg",
         "5db8befd-2647-4f5a-b730-222c8e73964e.jpg",
+        "0c1fbcd6-7d9f-47ac-b3dd-1f91b6c8b51b.jpg",
         "039e6761-d34e-4b86-943c-bdf914a6ad27.jpg",
         "6069d184-6e32-4972-83fc-11f623ad8039.jpg",
         "75046d80-d822-401b-b973-d094eafbe9bb.jpg",
@@ -32,6 +32,8 @@ export function initNews() {
     const track = document.querySelector(".news-track");
     const btnPrev = document.querySelector(".news-nav.prev");
     const btnNext = document.querySelector(".news-nav.next");
+    const btnBack = document.querySelector(".news-back-btn");
+
 
     if (!track) return;
 
@@ -42,11 +44,11 @@ export function initNews() {
         const src = `public/media/news/photos/${file}`;
 
         slide.innerHTML = `
-        <div class="news-image">
-            <img class="news-img blur" src="${src}" alt="" aria-hidden="true">
-            <img class="news-img main" src="${src}" alt="Noticia ${i + 2}"
-            draggable="false" oncontextmenu="return false">
-        </div>
+            <div class="news-image">
+                <img class="news-img blur" src="${src}" alt="" aria-hidden="true">
+                <img class="news-img main" src="${src}" alt="Noticia ${i + 2}"
+                draggable="false" oncontextmenu="return false">
+            </div>
         `;
 
         track.appendChild(slide);
@@ -55,9 +57,18 @@ export function initNews() {
     let index = 0;
     const total = track.children.length;
 
-    function update() {
-        track.style.transform = `translateX(-${index * 100}%)`;
+function update() {
+    track.style.transform = `translateX(-${index * 100}%)`;
+
+    if (btnBack) {
+        btnBack.classList.toggle("visible", index >= 1);
     }
+}
+
+btnBack.addEventListener("click", () => {
+    index = 0;
+    update();
+});
 
     btnNext.addEventListener("click", () => {
         index = (index + 1) % total;
@@ -70,7 +81,6 @@ export function initNews() {
     });
 
     let startX = 0;
-    let currentX = 0;
     let isDragging = false;
 
     const slider = document.querySelector(".news-slider");
@@ -111,5 +121,4 @@ export function initNews() {
             : btnPrev.click();
         }
     });
-
 }
