@@ -1,13 +1,13 @@
 export function initPlancards() {
     const plans = [
-        { tipo: "Sesión", nombre: "Individual", precio: 50, sesiones: 1, frecuencia: "Flexible" },
-        { tipo: "Plan", nombre: "Base", precio: 170, sesiones: 4, frecuencia: "1 sesión por semana" },
-        { tipo: "Plan", nombre: "Básico", precio: 305, sesiones: 8, frecuencia: "2 sesiones por semana" },
-        { tipo: "Plan", nombre: "Estándar", precio: 455, sesiones: 12, frecuencia: "3 sesiones por semana" },
-        { tipo: "Plan", nombre: "Premium", precio: 600, sesiones: 16, frecuencia: "4 sesiones por semana" },
-        { tipo: "Plan", nombre: "Especial", precio: 750, sesiones: 20, frecuencia: "5 sesiones por semana" },
-        { tipo: "Plan", nombre: "Extremo", precio: 840, sesiones: 24, frecuencia: "6 sesiones por semana" },
-        { tipo: "Plan", nombre: "Full", precio: 980, sesiones: 28, frecuencia: "7 sesiones por semana" }
+        { tipo: "Sesión", nombre: "Individual", precio: 60, sesiones: 1, frecuencia: "Flexible" },
+        { tipo: "Plan", nombre: "Base", precio: 220, sesiones: 4, frecuencia: "1 sesión por semana" },
+        { tipo: "Plan", nombre: "Básico", precio: 400, sesiones: 8, frecuencia: "2 sesiones por semana" },
+        { tipo: "Plan", nombre: "Estándar", precio: 550, sesiones: 12, frecuencia: "3 sesiones por semana" },
+        { tipo: "Plan", nombre: "Premium", precio: 720, sesiones: 16, frecuencia: "4 sesiones por semana" },
+        { tipo: "Plan", nombre: "Especial", precio: 890, sesiones: 20, frecuencia: "5 sesiones por semana" },
+        { tipo: "Plan", nombre: "Extremo", precio: 1020, sesiones: 24, frecuencia: "6 sesiones por semana" },
+        { tipo: "Plan", nombre: "Full", precio: 1180, sesiones: 28, frecuencia: "7 sesiones por semana" }
     ];
 
     const container = document.getElementById("plans-container");
